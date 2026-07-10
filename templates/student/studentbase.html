@@ -4,6 +4,7 @@
 
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
  
 
   <style media="screen">
@@ -147,6 +148,50 @@
     #check {
       display: none;
     }
+    @media (max-width:768px){
+
+.sidebar{
+    left:-250px;
+    width:250px;
+}
+
+#check:checked ~ .sidebar{
+    left:0;
+}
+
+.content{
+    margin-left:0;
+    padding:10px;
+}
+
+#check:checked ~ .content{
+    margin-left:0;
+}
+
+label #sidebar_btn{
+    left:20px;
+}
+
+.left_area h3{
+    font-size:18px;
+}
+
+.logout_btn{
+    margin-right:15px;
+    font-size:12px;
+    padding:5px 10px;
+}
+
+.sidebar a{
+    font-size:16px;
+}
+
+.sidebar .profile_image{
+    width:70px;
+    height:70px;
+}
+
+}
   </style>
 
 
