@@ -18,7 +18,7 @@
   </style>
 </head>
 <h2 style="text-align:center; color:blue;">ADD QUESTION</h2>
-<form method="POST" autocomplete="off" style="margin:100px;margin-top: 0px;">
+<form method="POST" enctype="multipart/form-data" autocomplete="off" style="margin:100px;margin-top: 0px;">
     {%csrf_token%}
     <div class="form-group">
         <label for="question">Course</label>
@@ -44,7 +44,9 @@
       {% render_field questionForm.option4|attr:'required:true' class="form-control" placeholder="Euro" %}
         <br>
       <label for="answer">Answer</label>
-      {% render_field questionForm.answer|attr:'required:true' class="form-control" %}
+      {% render_field questionForm.answer|attr:'required:true' class="form-control" %}<label for="pdf">Upload PDF</label>
+{% render_field questionForm.pdf class="form-control" %}
+<br>
     </div>
     
 
