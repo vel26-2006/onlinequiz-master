@@ -13,6 +13,7 @@ from student import models as SMODEL
 from teacher import forms as TFORM
 from student import forms as SFORM
 from django.contrib.auth.models import User
+from .pdf_reader import extract_questions_from_pdf
 
 
 
@@ -228,19 +229,35 @@ def admin_question_view(request):
 
 @login_required(login_url='adminlogin')
 def admin_add_question_view(request):
-    questionForm=forms.QuestionForm()
-    if request.method=='POST':
-        questionForm=forms.QuestionForm(request.POST,request.FILES)
-        if questionForm.is_valid():
-            question=questionForm.save(commit=False)
-            course=models.Course.objects.get(id=request.POST.get('courseID'))
-            question.course=course
-            question.save()       
-        else:
-            print("form is invalid")
-        return HttpResponseRedirect('/admin-view-question')
-    return render(request,'quiz/admin_add_question.html',{'questionForm':questionForm})
 
+    questionForm = forms.QuestionForm()
+
+    if request.method == 'POST':
+
+        course = models.Course.objects.get(
+            id=request.POST.get('courseID')
+        )
+
+        pdf = request.FILES.get('pdf')
+
+        if pdf:
+            import os
+            from django.core.files.storage import FileSystemStorage
+
+            fs = FileSystemStorage()
+
+            filename = fs.save(pdf.name, pdf)
+            pdf_path = fs.path(filename)
+
+            extract_questions_from_pdf(pdf_path, course)
+
+            return HttpResponseRedirect('/admin-view-question')
+
+    return render(
+        request,
+        'quiz/admin_add_question.html',
+        {'questionForm': questionForm}
+    )
 
 @login_required(login_url='adminlogin')
 def admin_view_question_view(request):
