@@ -29,15 +29,20 @@ def is_student(user):
     return user.groups.filter(name='STUDENT').exists()
 
 def afterlogin_view(request):
-    if is_student(request.user):      
-        return redirect('student/student-dashboard')
-                
+    if is_student(request.user):
+        return redirect('student-dashboard')
+
     elif is_teacher(request.user):
-        accountapproval=TMODEL.Teacher.objects.all().filter(user_id=request.user.id,status=True)
-        if accountapproval:
-            return redirect('teacher/teacher-dashboard')
+        accountapproval = TMODEL.Teacher.objects.filter(
+            user_id=request.user.id,
+            status=True
+        )
+
+        if accountapproval.exists():
+            return redirect('teacher-dashboard')
         else:
-            return render(request,'teacher/teacher_wait_for_approval.html')
+            return render(request, 'teacher/teacher_wait_for_approval.html')
+
     else:
         return redirect('admin-dashboard')
 
