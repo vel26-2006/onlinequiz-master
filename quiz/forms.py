@@ -2,8 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from . import models
 
-class QuestionForm(forms.Form):
-    class ContactusForm(forms.Form):
+class ContactusForm(forms.Form):
     Name = forms.CharField(max_length=30)
     Email = forms.EmailField()
     Message = forms.CharField(widget=forms.Textarea)
@@ -16,6 +15,7 @@ class CourseForm(forms.ModelForm):
         model = models.Course
         fields = ['course_name', 'question_number', 'total_marks']
 
+class QuestionForm(forms.Form):
     courseID = forms.ModelChoiceField(
         queryset=models.Course.objects.all(),
         empty_label="Course Name",
@@ -23,3 +23,4 @@ class CourseForm(forms.ModelForm):
     )
 
     pdf = forms.FileField(label="Choose PDF")
+   
