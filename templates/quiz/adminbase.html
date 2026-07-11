@@ -12,12 +12,7 @@
       text-decoration: none;
     }
 
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: "Gill Sans", sans-serif;;
-    }
-
+    
     header {
       position: fixed;
       background: #22242A;
@@ -132,14 +127,13 @@
       width: 80px;
     }
 
-    .content {
-      margin-left: 250px;
-     background: url("{% static 'image/background.png' %}") no-repeat center center;
-      background-position: center;
-      background-size: cover;
-      height: 100vh;
-      transition: 0.5s;
-    }
+    .content{
+    margin-left:250px;
+    min-height:100vh;
+    width:calc(100% - 250px);
+    overflow-x:hidden;
+    transition: 0.5s;
+}
 
     #check:checked~.content {
       margin-left: 60px;
@@ -402,6 +396,23 @@ button{
 }
 
 }
+
+@media (max-width:768px){
+
+.content{
+    margin-left:0;
+    width:100%;
+    min-height:100vh;
+    overflow-x:hidden;
+    padding:15px;
+}
+
+body{
+    overflow-x:hidden;
+}
+
+}
+
   </style>
 
 
