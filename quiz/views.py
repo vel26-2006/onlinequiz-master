@@ -234,18 +234,17 @@ def admin_add_question_view(request):
 
     if request.method == 'POST':
 
-        course = models.Course.objects.get(
-            id=request.POST.get('courseID')
+        course_name = request.POST.get('course_name')
+        course, created = models.Course.objects.get_or_create(
+            course_name=course_name
         )
 
         pdf = request.FILES.get('pdf')
 
         if pdf:
-            import os
             from django.core.files.storage import FileSystemStorage
 
             fs = FileSystemStorage()
-
             filename = fs.save(pdf.name, pdf)
             pdf_path = fs.path(filename)
 

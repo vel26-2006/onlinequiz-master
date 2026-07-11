@@ -134,7 +134,7 @@
 
     .content {
       margin-left: 250px;
-      background: url(background.png) no-repeat;
+     background: url("{% static 'image/background.png' %}") no-repeat center center;
       background-position: center;
       background-size: cover;
       height: 100vh;
@@ -190,6 +190,215 @@ label #sidebar_btn{
 .sidebar .profile_image{
     width:70px;
     height:70px;
+}
+
+}
+
+
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg,#4facfe,#00f2fe,#43e97b);
+    background-size: 400% 400%;
+    animation: bgMove 10s ease infinite;
+    min-height: 100vh;
+}
+
+@keyframes bgMove{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+.quiz-container{
+    width:100%;
+    max-width:900px;
+    
+}
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+h1{
+    text-align:center;
+    color:#fff;
+    font-size:40px;
+    margin-bottom:30px;
+    text-shadow:2px 2px 10px rgba(0,0,0,.3);
+}
+
+.question{
+    background:#fff;
+    border-radius:20px;
+    padding:25px;
+    margin-bottom:25px;
+    transition:.4s;
+    animation:slideUp .8s ease;
+}
+
+.question:hover{
+    transform:translateY(-5px);
+    box-shadow:0 10px 30px rgba(0,0,0,.2);
+}
+
+.question h3{
+    color:#333;
+    margin-bottom:20px;
+}
+
+.option{
+    display:block;
+    background:#f3f5ff;
+    padding:15px;
+    border-radius:12px;
+    margin-bottom:12px;
+    cursor:pointer;
+    transition:.3s;
+    border:2px solid transparent;
+}
+
+.option:hover{
+    background:#4facfe;
+    color:#fff;
+    border-color:#2196f3;
+    transform:translateX(8px);
+}
+
+.option input{
+    margin-right:10px;
+    transform:scale(1.2);
+}
+
+button{
+    width:100%;
+    padding:18px;
+    border:none;
+    border-radius:50px;
+    font-size:20px;
+    font-weight:bold;
+    color:#fff;
+    cursor:pointer;
+    background:linear-gradient(45deg,#ff512f,#dd2476);
+    transition:.4s;
+    position:relative;
+    overflow:hidden;
+}
+
+button:hover{
+    transform:scale(1.05);
+    box-shadow:0 10px 25px rgba(0,0,0,.3);
+}
+
+button::before{
+    content:'';
+    position:absolute;
+    top:0;
+    left:-100%;
+    width:100%;
+    height:100%;
+    background:rgba(255,255,255,.3);
+    transition:.5s;
+}
+
+button:hover::before{
+    left:100%;
+}
+
+.result{
+    display:none;
+    text-align:center;
+    color:#fff;
+    margin-top:25px;
+    animation:zoom .8s;
+}
+
+@keyframes zoom{
+    from{
+        transform:scale(.5);
+        opacity:0;
+    }
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+}
+
+.progress{
+    width:100%;
+    height:12px;
+    background:#ddd;
+    border-radius:20px;
+    overflow:hidden;
+    margin-bottom:25px;
+}
+
+.progress-bar{
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg,#00dbde,#fc00ff);
+    animation:loadBar 2s forwards;
+}
+
+@keyframes loadBar{
+    from{
+        width:0;
+    }
+    to{
+        width:100%;
+    }
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:20px;
+    box-shadow:0 15px 40px rgba(0,0,0,.15);
+    transition:.4s;
+}
+
+.card:hover{
+    transform:translateY(-8px) rotate(.5deg);
+}
+
+img{
+    max-width:100%;
+    border-radius:15px;
+}
+
+@media(max-width:768px){
+
+.container{
+    padding:20px;
+}
+
+h1{
+    font-size:28px;
+}
+
+.question{
+    padding:18px;
+}
+
+button{
+    font-size:18px;
 }
 
 }
