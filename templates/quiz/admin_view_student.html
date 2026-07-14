@@ -19,42 +19,43 @@
     .row {
       margin: 100px;
     }
+    
   </style>
 </head>
 <br><br>
-<div class="container">
+<div class="container" style="max-width:700px; margin:auto;">
+
   <div class="panel panel-primary">
     <div class="panel-heading">
-      <h6 class="panel-title">Students</h6>
+      <h4 class="text-center">Students</h4>
     </div>
-    <table class="table table-hover" id="dev-table">
+
+    <table class="table table-bordered table-hover text-center">
       <thead>
-        <tr>
-
-          <th>Name</th>
-          <th>Profile Picture</th>
-          <th>Mobile</th>
-          <th>Address</th>
-         
-          <th>Update</th>
-          <th>Delete</th>
-        </tr>
+       <tr>
+    <th style="text-align:center;">Name</th>
+    <th style="text-align:center;">Mobile</th>
+    <th style="text-align:center;">Delete</th>
+</tr>
       </thead>
-      {% for t in students %}
-      <tr>
 
-        <td> {{t.get_name}}</td>
-        <td> <img src="{% static t.profile_pic.url %}" alt="Profile Pic" height="40px" width="40px" /></td>
-        <td>{{t.mobile}}</td>
-        <td>{{t.address}}</td>
-        
-        <td><a class="btn btn-primary btn-xs" href="{% url 'update-student' t.id  %}"><span class="glyphicon glyphicon-edit"></span></a></td>
-        <td><a class="btn btn-danger btn-xs" href="{% url 'delete-student' t.id  %}"><span class="glyphicon glyphicon-trash"></span></a></td>
-      </tr>
-      {% endfor %}
+      <tbody>
+        {% for t in students %}
+        <tr>
+          <td>{{ t.get_name }}</td>
+          <td>{{ t.mobile }}</td>
+          <td>
+            <a class="btn btn-danger btn-sm" href="{% url 'delete-student' t.id %}">
+              <span class="glyphicon glyphicon-trash"></span>
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+
     </table>
   </div>
-</div>
 
+</div>
 <br><br><br><br><br><br>
 {% endblock content %}
