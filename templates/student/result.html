@@ -1,0 +1,128 @@
+{% extends 'student/studentbase.html' %}
+{% block content %}
+
+<style>
+.container{
+    max-width:900px;
+    margin:40px auto;
+}
+
+.result-card{
+    background:#fff;
+    border-radius:20px;
+    padding:30px;
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+}
+
+.score-box{
+    text-align:center;
+    background:linear-gradient(135deg,#2563eb,#06b6d4);
+    color:white;
+    border-radius:15px;
+    padding:25px;
+    margin-bottom:30px;
+}
+
+.question{
+    border-left:5px solid #2563eb;
+    background:#f8f9fa;
+    padding:15px;
+    margin-bottom:20px;
+    border-radius:10px;
+}
+
+.correct{
+    color:green;
+    font-weight:bold;
+}
+
+.wrong{
+    color:red;
+    font-weight:bold;
+}
+
+.btn-back{
+    background:#2563eb;
+    color:white;
+    padding:10px 25px;
+    border-radius:8px;
+    text-decoration:none;
+}
+</style>
+
+<div class="container">
+
+<div class="result-card">
+
+<div class="score-box">
+<h2>🎉 Exam Completed</h2>
+
+<h1>Score : {{ score }}</h1>
+
+<h4>Total Questions : {{ answers|length }}</h4>
+
+{% if score >= answers|length|add:"-1" %}
+<h3>🏆 Excellent!</h3>
+{% else %}
+<h3>👍 Keep Practicing!</h3>
+{% endif %}
+
+</div>
+<h2>🎉 Exam Completed</h2>
+
+<h3>Your Score: {{ score }} / {{ answers|length }}</h3>
+
+<hr>
+
+{% for ans in answers %}
+<div class="card mb-3 p-3">
+    <h5>{{ forloop.counter }}. {{ ans.question }}</h5>
+
+    
+
+    
+
+    {% if ans.is_correct %}
+        <span style="color:green;">✔️ Correct</span>
+    {% else %}
+        <span style="color:red;">✘ Wrong</span>
+    {% endif %}
+</div>
+{% endfor %}
+
+{% for ans in answers %}
+
+<div class="question">
+
+<h5>{{ forloop.counter }}. {{ ans.question }}</h5>
+
+<p>
+<b>Your Answer :</b>
+
+{% if ans.is_correct %}
+<span class="correct">{{ ans.selected }}</span>
+{% else %}
+<span class="wrong">{{ ans.selected }}</span>
+{% endif %}
+</p>
+
+<p>
+<b>Correct Answer :</b>
+<span class="correct">{{ ans.correct }}</span>
+</p>
+
+</div>
+
+{% endfor %}
+
+<div class="text-center mt-4">
+<a href="{% url 'student-dashboard' %}" class="btn-primary">
+⬅️ Back to Dashboard
+</a>
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}

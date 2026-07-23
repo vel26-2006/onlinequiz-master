@@ -85,6 +85,143 @@
         margin-bottom:20px;
     }
 }
+.container-fluid{
+    margin-top: 10px;
+    
+
+
+
+}
+
+
+.row{
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.dashboard-card{
+    border-radius:20px;
+    padding:25px;
+    color:#fff;
+    transition:.4s;
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+    cursor:pointer;
+}
+
+.dashboard-card:hover{
+    transform:translateY(-10px) scale(1.03);
+    box-shadow:0 20px 40px rgba(37,99,235,.5);
+}
+
+.student-card{
+    background:linear-gradient(135deg,#06b6d4,#2563eb);
+}
+
+.course-card{
+    background:linear-gradient(135deg,#f97316,#ef4444);
+}
+
+.question-card{
+    background:linear-gradient(135deg,#8b5cf6,#4f46e5);
+}
+
+.dashboard-card h5{
+    font-size:18px;
+    font-weight:600;
+}
+
+.dashboard-card h2{
+    font-size:40px;
+    font-weight:bold;
+    margin-top:15px;
+}
+
+.dashboard-card i{
+    font-size:45px;
+    opacity:.8;
+}
+
+/* Results Card */
+.results-card{
+    background: rgba(255,255,255,0.08);
+    border-radius:15px;
+    padding:20px;
+    margin-top:30px;
+    overflow-x:auto;
+    box-shadow:0 8px 20px rgba(0,0,0,.3);
+}
+
+/* Table */
+.results-card table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:600px;
+}
+
+.results-card th,
+.results-card td{
+    padding:12px;
+    text-align:center;
+    border:1px solid rgba(255,255,255,.2);
+    color:#fff;
+}
+
+.results-card th{
+    background:#2563eb;
+    color:#fff;
+}
+
+.results-card tr:nth-child(even){
+    background:rgba(255,255,255,.05);
+}
+
+.results-card h3{
+    color:#fff;
+    margin-bottom:15px;
+}
+
+/* Mobile Responsive */
+@media (max-width:768px){
+
+    .results-card{
+        padding:10px;
+    }
+
+    .results-card table{
+        min-width:500px;
+        font-size:14px;
+    }
+
+    .results-card h3{
+        font-size:20px;
+    }
+}
+
+.results-card{
+    background: linear-gradient(135deg,#1e293b,#576880);
+    border-radius:18px;
+    padding:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.4);
+}
+
+.score-rank{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.score{
+    font-weight: bold;
+    min-width: 30px;
+    text-align: left;
+}
+
+.rank{
+    font-weight: 600;
+    color: gold;
+}
+
+
     </style>
   </head>
 <br><br>
@@ -94,44 +231,73 @@
 
 
 
-<div class="container-fluid mt-5">
-    <div class="row g-3">
+<div class="container-fluid ">
+     <div class="row justify-content-center">
 
-        <div class="col-12 col-sm-6 col-lg-3">
-            <a href="/admin-student" style="text-decoration:none;">
-                <div class="card bg-primary text-white">
-                    <div class="card-body">
-                        <h5>Total Students</h5>
-                        <h2>{{ total_student }}</h2>
-                    </div>
-                </div>
-            </a>
+        <div class="col-md-4">
+    <a href="/admin-student">
+        <div class="dashboard-card student-card">
+            <i class="fas fa-user-graduate"></i>
+            <h5>Total Students</h5>
+            <h2>{{ total_student }}</h2>
         </div>
+    </a>
+</div>
 
-       
-
-        <div class="col-12 col-sm-6 col-lg-3">
-            <a href="/admin-course" style="text-decoration:none;">
-                <div class="card bg-danger text-white">
-                    <div class="card-body">
-                        <h5>Total Courses</h5>
-                        <h2>{{ total_course }}</h2>
-                    </div>
-                </div>
-            </a>
+<div class="col-md-4">
+    <a href="/admin-course">
+        <div class="dashboard-card course-card">
+            <i class="fas fa-book"></i>
+            <h5>Total Courses</h5>
+            <h2>{{ total_course }}</h2>
         </div>
+    </a>
+</div>
 
-        <div class="col-12 col-sm-6 col-lg-3">
-            <a href="/admin-question" style="text-decoration:none;">
-                <div class="card bg-dark text-white">
-                    <div class="card-body">
-                        <h5>Total Questions</h5>
-                        <h2>{{ total_question }}</h2>
-                    </div>
-                </div>
-            </a>
+<div class="col-md-4">
+    <a href="/admin-question">
+        <div class="dashboard-card question-card">
+            <i class="fas fa-question-circle"></i>
+            <h5>Total Questions</h5>
+            <h2>{{ total_question }}</h2>
+
+            
         </div>
-
+    </a>
+</div>
+<div class="container mt-4">
+    <div class="results-card">
+    <h3><i class="fas fa-trophy"></i> Latest Student Results</h3>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Student</th>
+                <th>Exam</th>
+                <th>Score</th>
+                <th>Rank</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for r in results %}
+            <tr>
+                <td>{{ r.student.get_name }}</td>
+                <td>{{ r.exam.course_name }}</td>
+             <td>{{ r.marks }}</td>
+<td>
+    {% if forloop.counter == 1 %}
+        🥇 Rank 1
+    {% elif forloop.counter == 2 %}
+        🥈 Rank 2
+    {% elif forloop.counter == 3 %}
+        🥉 Rank 3
+    {% endif %}
+</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+</div>
     </div>
 </div>
 

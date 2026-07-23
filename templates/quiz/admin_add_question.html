@@ -15,9 +15,38 @@
         text-decoration: none;
       }
     
+      .form-container,
+.upload-box{
+    width: 100%;
+    max-width: 800px;
+    margin: 40px auto;
+}
+
+form{
+    width: 100%;
+    margin: 0 auto !important;
+}
+
+.form-control{
+    width: 100%;
+    height: 45px;
+}
+
+.upload-btn{
+    width: 220px !important;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    margin: 30px auto;
+    border-radius: 30px;
+    font-size: 18px;
+}
   </style>
 </head>
-<h2 style="text-align:center; color:blue;">ADD QUESTION</h2>
+<h2 style="text-align:center; color:rgb(250, 250, 250);">ADD QUESTION</h2>
+<div class="upload-box">
 
         <form method="POST" enctype="multipart/form-data" style="margin:100px;">
 
@@ -39,10 +68,11 @@
 
     <br>
 
-    <button type="submit" class="btn btn-primary">
+    <button type="submit" class="btn btn-primary upload-btn">
         Upload PDF
     </button>
 
 </form>
-<br><br><br>
+</div>
+
 {% endblock content %}

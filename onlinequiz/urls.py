@@ -12,9 +12,14 @@ urlpatterns = [
     path('aboutus', views.aboutus_view),
     path('contactus', views.contactus_view),
     path('afterlogin', views.afterlogin_view, name='afterlogin'),
+  path(
+    'delete-all-questions/<int:cid>/',
+    views.delete_all_questions,
+    name='delete-all-questions'
+),
 
     path('adminclick', views.adminclick_view),
-    path('adminlogin', LoginView.as_view(template_name='quiz/adminlogin.html'), name='adminlogin'),
+   path('adminlogin', views.admin_login_view, name='adminlogin'),
     path('admin-dashboard', views.admin_dashboard_view, name='admin-dashboard'),
    
     path('admin-student', views.admin_student_view, name='admin-student'),

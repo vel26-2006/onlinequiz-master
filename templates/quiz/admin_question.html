@@ -67,32 +67,93 @@
       left: 0px;
       right: 0px;
     }
+
+    .dashboard-card{
+    border-radius:20px;
+    padding:35px;
+    color:#fff;
+    min-height:180px;
+    transition:.4s;
+    box-shadow:0 10px 25px rgba(0,0,0,.25);
+}
+
+.dashboard-card:hover{
+    transform:translateY(-8px) scale(1.03);
+    box-shadow:0 18px 35px rgba(37,99,235,.45);
+}
+
+.student-card{
+    background:linear-gradient(135deg,#06b6d4,#2563eb);
+}
+
+.course-card{
+    background:linear-gradient(135deg,#f97316,#ef4444);
+}
+
+.dashboard-card i{
+    font-size:48px;
+    margin-bottom:18px;
+}
+
+.dashboard-card h4{
+    font-size:28px;
+    font-weight:700;
+    margin-bottom:8px;
+}
+
+.dashboard-card p{
+    font-size:15px;
+    opacity:.9;
+}
+
+.row{
+    justify-content:center;
+    gap:25px;
+}
+
+@media(max-width:768px){
+    .dashboard-card{
+        min-height:160px;
+        padding:25px;
+    }
+
+    .dashboard-card h4{
+        font-size:22px;
+    }
+
+    .dashboard-card i{
+        font-size:38px;
+    }
+}
     </style>
   </head>
 <br><br>
 
-  <div class="container">
-    <div class="row">
-      <div class="col-md-4 col-xl-6">
-        <div class="card bg-c-blue order-card">
-          <div class="card-block">
-            <h6 class="m-b-20"> <a href="admin-add-question" style="text-decoration: none;color:white;">Add Question</a> </h6>
-            <h2 class="text-right"><i class="fas fa-plus f-left"></i></h2>
-            
-          </div>
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+
+        <div class="col-lg-5 col-md-6 col-12 mb-4">
+            <a href="/admin-add-question">
+                <div class="dashboard-card student-card">
+                    <i class="fas fa-plus-circle"></i>
+                    <h4>Add Question</h4>
+                    <p>Create new quiz questions</p>
+                </div>
+            </a>
         </div>
-      </div>
-  
-      <div class="col-md-4 col-xl-6">
-        <div class="card bg-c-green order-card">
-          <div class="card-block">
-            <h6 class="m-b-20"><a href="admin-view-question" style="text-decoration: none;color:white;">View Questions</a> </h6>
-            <h2 class="text-right"><i class="fas fa-eye f-left"></i></h2>
-            
-          </div>
+
+        <div class="col-lg-5 col-md-6 col-12 mb-4">
+            <a href="/admin-view-question">
+                <div class="dashboard-card course-card">
+                    <i class="fas fa-eye"></i>
+                    <h4>View Questions</h4>
+                    <p>Manage all questions</p>
+                </div>
+            </a>
         </div>
-      </div>
-  
+
+    </div>
+</div>
      
   
      

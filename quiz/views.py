@@ -14,8 +14,54 @@ from student import models as SMODEL
 from student import forms as SFORM
 from django.contrib.auth.models import User
 from .pdf_reader import extract_questions_from_pdf
+from quiz.models import Result
+
+from student import models as SMODEL
+from quiz import models as QMODEL
+from quiz.models import Course, Question, Result
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
+from django.shortcuts import redirect, get_object_or_404
+from .models import Course, Question
+from django.shortcuts import render, get_object_or_404
+
+def view_question_view(request, pk):
+    course = get_object_or_404(Course, id=pk)
+    questions = Question.objects.filter(course=course)
+
+    return render(request, 'quiz/view_question.html', {
+        'questions': questions,
+        'course': course,
+    })
+
+@login_required(login_url='adminlogin')
+def admin_view_question_view(request):
+    courses = Course.objects.all()
+    return render(request, 'quiz/admin_view_question.html', {
+        'courses': courses
+    })
 
 
+def delete_all_questions(request, cid):
+    course = get_object_or_404(Course, id=cid)
+    Question.objects.filter(course=course).delete()
+    return redirect('admin-view-question')
+
+
+def admin_login_view(request):
+    if request.method == "POST":
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None and user.is_superuser:
+            login(request, user)
+            return redirect("admin-dashboard")
+        else:
+            messages.error(request, "Invalid Admin Username or Password")
+
+    return render(request, "quiz/adminlogin.html")
 
 def home_view(request):
     if request.user.is_authenticated:
@@ -29,15 +75,23 @@ def is_student(user):
     return user.groups.filter(name='STUDENT').exists()
 
 
+def is_admin(user):
+    return user.is_superuser
 
-
-        
+@login_required
 def afterlogin_view(request):
-    if is_student(request.user):
+
+    if is_admin(request.user):
+        return redirect('admin-dashboard')
+
+    elif is_student(request.user):
         return redirect('student-dashboard')
 
     else:
-        return redirect('admin-dashboard')
+        return redirect('/')
+
+        
+
 
 def adminclick_view(request):
     if request.user.is_authenticated:
@@ -45,17 +99,21 @@ def adminclick_view(request):
     return HttpResponseRedirect('adminlogin')
 
 
-@login_required(login_url='adminlogin')
-def admin_dashboard_view(request):
-    dict={
-    'total_student':SMODEL.Student.objects.all().count(),
-    
-    'total_course':models.Course.objects.all().count(),
-    'total_question':models.Question.objects.all().count(),
-    }
-    return render(request,'quiz/admin_dashboard.html',context=dict)
 
 @login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
+def admin_dashboard_view(request):
+    dict = {
+        'total_student': SMODEL.Student.objects.all().count(),
+        
+        'total_course': Course.objects.all().count(),
+        'total_question': Question.objects.all().count(),
+       'results': Result.objects.select_related('student', 'exam').order_by('-marks', '-id')[:10],
+    }
+    return render(request, 'quiz/admin_dashboard.html', context=dict)
+
+@login_required(login_url='adminlogin')
+
 def admin_teacher_view(request):
     dict={
    
@@ -136,6 +194,7 @@ def admin_view_teacher_salary_view(request):
 
 
 @login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
 def admin_student_view(request):
     dict={
     'total_student':SMODEL.Student.objects.all().count(),
@@ -143,6 +202,7 @@ def admin_student_view(request):
     return render(request,'quiz/admin_student.html',context=dict)
 
 @login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
 def admin_view_student_view(request):
     students= SMODEL.Student.objects.all()
     return render(request,'quiz/admin_view_student.html',{'students':students})
@@ -179,11 +239,13 @@ def delete_student_view(request,pk):
 
 
 @login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
 def admin_course_view(request):
     return render(request,'quiz/admin_course.html')
 
 
 @login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
 def admin_add_course_view(request):
     courseForm=forms.CourseForm()
     if request.method=='POST':
@@ -210,11 +272,13 @@ def delete_course_view(request,pk):
 
 
 @login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
 def admin_question_view(request):
     return render(request,'quiz/admin_question.html')
 
 
 @login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
 def admin_add_question_view(request):
 
     questionForm = forms.QuestionForm()
@@ -246,9 +310,14 @@ def admin_add_question_view(request):
     )
 
 @login_required(login_url='adminlogin')
-def admin_view_question_view(request):
-    courses= models.Course.objects.all()
-    return render(request,'quiz/admin_view_question.html',{'courses':courses})
+def view_question_view(request, pk):
+    course = Course.objects.get(id=pk)
+    questions = Question.objects.filter(course=course)
+
+    return render(request, 'quiz/view_question.html', {
+        'questions': questions,
+        'course': course,
+    })
 
 @login_required(login_url='adminlogin')
 def view_question_view(request,pk):

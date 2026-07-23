@@ -6,7 +6,7 @@ urlpatterns = [
 path('studentclick', views.studentclick_view),
 path(
     'studentlogin',
-    LoginView.as_view(template_name='student/studentlogin.html'),
+    views.student_login_view,
     name='studentlogin'
 ),
 path('studentsignup', views.student_signup_view,name='studentsignup'),

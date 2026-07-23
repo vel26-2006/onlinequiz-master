@@ -22,7 +22,98 @@
       font-size: 20px;
       font-family: sans-serif;
 
+    
     }
+    .navbar{
+    background:rgba(15,23,42,.75)!important;
+    backdrop-filter:blur(15px);
+    
+    transition:.4s;
+    border-bottom: none !important;
+    box-shadow: 0 8px 30px rgba(0,0,0,.3) !important;
+}
+hr{
+    display: none !important;
+}
+
+.navbar-brand{
+    color:#fff!important;
+    font-size:30px;
+    font-weight:bold;
+}
+
+.navbar-nav .nav-link{
+    color:#fff!important;
+    margin:0 10px;
+    transition:.3s;
+}
+
+.navbar-nav .nav-link:hover{
+    color:#38bdf8!important;
+    transform:translateY(-2px);
+}
+
+.navbar-toggler{
+    border:none;
+}
+body{
+    background:linear-gradient(135deg,#0f172a,#2563eb,#06b6d4);
+    min-height:100vh;
+    padding-top: 80px;
+}
+
+.contact-card{
+   width:550px;
+    margin:70px auto;
+    padding:30px;
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(10px);
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.3);
+}
+
+.contact-card h2{
+    text-align:center;
+    color:white;
+    margin-bottom:25px;
+}
+
+.contact-card input,
+.contact-card textarea{
+    width:100%;
+    padding:12px 15px;
+    margin:12px 0;
+    border:none;
+    border-radius:12px;
+    outline:none;
+}
+
+.contact-card button{
+     width:100%;
+    padding:12px;
+    background:#2563eb;
+    color:white;
+    border:none;
+    border-radius:10px;
+    font-size:18px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.contact-card button:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 25px rgba(37,99,235,.4);
+}
+
+@keyframes fadeIn{
+    from{opacity:0;transform:translateY(30px);}
+    to{opacity:1;transform:translateY(0);}
+}
+
+.contact-container{
+    margin-top:40px;
+    margin-bottom:40px;
+}
   </style>
 </head>
 
@@ -51,7 +142,7 @@
         </div>
 
         <div class="navbar-nav">
-          <a href="/aboutus" class="nav-item nav-link">About Us</a>
+         
           <a href="/contactus" class="nav-item nav-link">Contact Us</a>
           
         </div>

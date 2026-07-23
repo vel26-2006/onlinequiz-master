@@ -15,6 +15,75 @@
     .jumbotron h1 {
       text-align: center;
     }
+
+    body{
+    margin:0;
+    padding:0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg,#0f172a,#2563eb,#38bdf8);
+    min-height:100vh;
+    padding-top: 0px;
+}
+
+.jumbotron{
+    width:70%;
+    max-width:700px;
+    margin:80px auto;
+    background:#2f96afa1;
+    border-radius:20px;
+    padding:50px;
+    text-align:center;
+    box-shadow:0 15px 40px rgba(0,0,0,.25);
+    animation:fadeIn .8s ease;
+}
+
+.jumbotron h1{
+    color:#16a34a;
+    font-size:45px;
+    font-weight:bold;
+}
+
+.jumbotron h1::before{
+    content:"✅";
+    display:block;
+    font-size:70px;
+    margin-bottom:15px;
+}
+
+.lead{
+    color:#555;
+    font-size:20px;
+}
+
+.btn-primary{
+    background:#2563eb;
+    border:none;
+    padding:12px 35px;
+    border-radius:30px;
+    font-size:18px;
+    transition:.3s;
+}
+
+.btn-primary:hover{
+    background:#1d4ed8;
+    transform:scale(1.08);
+    box-shadow:0 8px 20px rgba(37,99,235,.4);
+}
+
+hr{
+    margin:30px 0;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
   </style>
 
 </head>
@@ -24,14 +93,19 @@
   {% include "quiz/navbar.html" %}
   <br><br>
   <div class="jumbotron">
-    <h1 class="display-4">Your message sent successfully !</h1>
-    <p class="lead">We will respond to your feedback soon</p>
-    <hr class="my-4">
-    <p>Check other features of website !</p>
+    <h1>Your Message Sent Successfully!</h1>
     <p class="lead">
-      <a class="btn btn-primary btn-lg" href="/" role="button">HOME</a>
+        Thank you for your valuable feedback.
     </p>
-  </div>
+
+    <hr>
+
+    <p>We will respond to your feedback as soon as possible.</p>
+
+    <a class="btn btn-primary btn-lg" href="/">
+        🏠 Back to Home
+    </a>
+</div>
 
   {% include "quiz/footer.html" %}
 </body>

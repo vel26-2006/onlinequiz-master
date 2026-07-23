@@ -46,7 +46,24 @@
         margin-bottom: 30px;
         -webkit-transition: all 0.3s ease-in-out;
         transition: all 0.3s ease-in-out;
-      }
+
+        animation: cardFade .8s ease forwards;
+    opacity:0;
+    transform:translateY(40px);
+
+      transition: transform .35s ease,
+                box-shadow .35s ease,
+                background .35s ease;
+
+                 border:none;
+    border-radius:22px;
+    overflow:hidden;
+    backdrop-filter:blur(12px);
+    background:rgba(255,255,255,0.10);
+    box-shadow:0 15px 35px rgba(0,0,0,.35);
+    transition:transform .35s ease, box-shadow .35s ease;
+}
+      
   
       .card .card-block {
         padding: 25px;
@@ -67,42 +84,207 @@
       left: 0px;
       right: 0px;
     }
+
+    body{
+    background: linear-gradient(135deg,#0f172a,#1e3a8a,#2563eb);
+    min-height:100vh;
+    font-family:'Poppins',sans-serif;
+  
+    
+}
+
+.container{
+    margin-top:40px;
+    max-width: 1100px;
+}
+
+
+
+
+.card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 45px rgba(0,0,0,.45);
+    background:inherit !important;
+    color:#fff !important;
+
+    
+}
+
+.card:hover h6,
+.card:hover h2,
+.card:hover i,
+.card:hover span,
+.card:hover a{
+    color:#fff !important;
+}
+
+.bg-c-blue{
+    background:linear-gradient(135deg,#00c6ff,#0072ff) !important;
+}
+
+.bg-c-green{
+    background:linear-gradient(135deg,#8e2de2,#4a00e0) !important;
+}
+
+.bg-c-yellow{
+    background:linear-gradient(135deg,#ff9966,#ff5e62) !important;
+}
+
+.bg-c-pink{
+    background:linear-gradient(135deg,#ff6a88,#ff99ac) !important;
+}
+
+
+
+.card-block{
+    padding:35px;
+}
+
+.card h6{
+    font-size:22px;
+    font-weight:600;
+    color:#fff;
+}
+
+.card h2{
+    font-size:48px;
+    color:#fff;
+    font-weight:bold;
+}
+
+.card i{
+    font-size:45px;
+    color:#fff;
+}
+
+.f-left{
+    float:left;
+}
+
+.text-right span{
+    float:right;
+}
+
+a{
+    color:white!important;
+    text-decoration:none!important;
+}
+
+.card:hover,
+.order-card:hover,
+.bg-c-blue:hover,
+.bg-c-green:hover,
+.bg-c-yellow:hover,
+.bg-c-pink:hover{
+    background: inherit !important;
+    filter: none !important;
+    opacity: 1 !important;
+    color: #fff !important;
+}
+
+.card:hover{
+    transform: translateY(-8px) !important;
+    box-shadow: 0 20px 40px rgba(0,0,0,.35) !important;
+    
+    transform:translateY(-10px) scale(1.04);
+    box-shadow:0 20px 45px rgba(37,99,235,.5);
+}
+
+
+.row{
+    display:flex;
+    justify-content:center;
+    align-items:stretch;
+    gap:25px;
+}
+
+.col-md-4,
+.col-xl-6{
+    margin-bottom:25px;
+}
+
+
+
+a{
+    display:block;
+    text-decoration:none;
+    color:inherit;
+}
+
+@keyframes cardFade{
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.card:nth-child(1){
+    animation-delay:.2s;
+}
+
+.card:nth-child(2){
+    animation-delay:.4s;
+}
+
+
+
     </style>
   </head>
-<br><br>
+
 
   <div class="container">
     <div class="row">
-      <div class="col-md-4 col-xl-6">
-        <div class="card bg-c-blue order-card">
-          <div class="card-block">
-            <h6 class="m-b-20"> <a href="admin-view-student" style="text-decoration: none;color:white;">Total Student</a> </h6>
-            <h2 class="text-right"><i class="fas fa-user-graduate f-left"></i><span>{{total_student}}</span></h2>
-            
-          </div>
+
+        <div class="col-md-6">
+          <a href="{% url 'admin-view-student' %}" style="text-decoration:none;">
+                <div class="card bg-c-green order-card">
+                    <div class="card-block">
+                        <h6>  Total Student </h6>
+                        <h2>
+                            <i class="fas fa-chart-line"></i>
+                            <span>📊</span>
+                        </h2>
+                    </div>
+                </div>
+            </a>
         </div>
-      </div>
-  
-      <div class="col-md-4 col-xl-6">
-        <div class="card bg-c-green order-card">
-          <div class="card-block">
-            <h6 class="m-b-20"><a href="admin-view-student-marks" style="text-decoration: none;color:white;">Student Marks</a> </h6>
-            <h2 class="text-right"><i class="fas fa-sort-numeric-up f-left"></i><span>:)</span></h2>
-            
-          </div>
+
+        <div class="col-md-6">
+            <a href="{% url 'admin-view-student-marks' %}" style="text-decoration:none;">
+                <div class="card bg-c-green order-card">
+                    <div class="card-block">
+                        <h6 class="m-b-20">View Student Marks</h6>
+                        <h2 class="text-right">
+                            <i class="fas fa-sort-numeric-up f-left"></i>
+                        </h2>
+                    </div>
+                </div>
+            </a>
         </div>
-      </div>
-  
-     
-  
-     
+
     </div>
-  </div>
+</div>
 
 
-<br><br><br><br><br><br><br><br><br><br>
+
 
 <script src="http://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
 
+<script>
+document.querySelectorAll("a .card").forEach(card => {
+    card.parentElement.addEventListener("click", function(e) {
+        e.preventDefault();
 
+        const link = this.href;
+
+        card.style.transition = "transform 0.25s ease, box-shadow 0.25s ease";
+        card.style.transform = "scale(0.95)";
+        card.style.boxShadow = "0 25px 50px rgba(37,99,235,.6)";
+
+        setTimeout(() => {
+            window.location.href = link;
+        }, 220);
+    });
+});
+</script>
 {% endblock content %}

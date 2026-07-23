@@ -2,6 +2,8 @@
 {% load widget_tweaks %}
 <html lang="en" dir="ltr">
   <head>
+    <link rel="stylesheet"
+     href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <meta charset="utf-8">
     <title></title>
     <style media="screen">
@@ -9,40 +11,83 @@
     margin: 0;
     padding: 0;
     font-family: sans-serif;
-    background: linear-gradient(to right, #b92b27, #1565c0)
+    background: linear-gradient(to right, #b92b27, #1565c0);
+     animation: pageFade 0.8s ease-in-out;
+    
+}
+
+.login-container{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:85vh;
+    
+}
+
+.container,
+.row,
+.col-md-6,
+.card{
+    background:transparent !important;
+    border:none !important;
+    box-shadow:none !important;
 }
 
 .box {
-    width: 500px;
-    padding: 40px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    background: #191919;
+    width:500px;
+    padding:40px;
+    margin:80px auto;
+    position:relative;
+     animation: cardPop 0.9s ease forwards;
+    background:rgba(255,255,255,.12);
+    backdrop-filter:blur(20px);
+    border:2px solid rgba(255,255,255,.25);
+    border-radius:25px;
+    text-align:center;
+}
+@keyframes pageFade{
+    from{
+        opacity:0;
+    }
+    to{
+        opacity:1;
+    }
+}
 
-    text-align: center;
-    transition: 0.25s;
-    margin-top: 100px
+@keyframes cardPop{
+    0%{
+        opacity:0;
+        transform:translateY(60px) scale(0.9);
+    }
+    100%{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
 }
 
 .box input[type="text"],
 .box input[type="password"] {
-    border: 0;
-    background: none;
-    display: block;
-    margin: 20px auto;
+
+     display: block;
+    width: 300px;
+    height: 50px;
+    margin: 18px auto;
+    padding: 10px 20px;
+
+    border-radius: 30px;
+    background: #f7f3f3;
+    color: #000;
     text-align: center;
-    border: 2px solid #3498db;
-    padding: 10px 10px;
-    width: 250px;
+    font-size: 16px;
     outline: none;
-    color: white;
-    border-radius: 24px;
-    transition: 0.25s
+    transition: all .3s ease-in-out;
+     border: 2px solid #0c3a68c7;
+  
 }
 
+
 .box h1 {
-    color: white;
+    color: rgba(0, 0, 0, 0.644);
     text-transform: uppercase;
     font-weight: 500
 }
@@ -50,55 +95,162 @@
 .box input[type="text"]:focus,
 .box input[type="password"]:focus {
     width: 300px;
-    border-color: #2ecc71
+    border-color: #0f1761c9;
+     border: 2px solid #0c3a68c7;
+
+
+    
 }
 
 .box input[type="submit"] {
-    border: 0;
-    background: none;
     display: block;
-    margin: 20px auto;
-    text-align: center;
-    border: 2px solid #2ecc71;
-    padding: 14px 40px;
-    outline: none;
-    color: white;
-    border-radius: 24px;
-    transition: 0.25s;
-    cursor: pointer
+    width: 140px;
+    height: 50px;
+    margin: 25px auto;
+    border: 2px solid #0c3a68c7;
+    border-radius: 30px;
+    background: rgba(9, 93, 161, 0.87);
+    color: #050202;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all .3s ease-in-out; 
 }
 
-.box input[type="submit"]:hover {
-    background: #2ecc71
+
+
+body{
+    background:linear-gradient(135deg,#0f172a,#1e3a8a,#06b6d4);
+    min-height:100vh;
 }
 
+.card{
+   background:none;
+    box-shadow:none;
+    border:none;
+}
+
+.card-body{
+    padding:40px;
+}
+
+.form-control{
+    border-radius:12px;
+    height:50px;
+}
+
+.btn-primary,
+.btn-success,
+.btn-info{
+    border-radius:30px;
+    padding:12px;
+    transition: all .3s ease-in-out;
+}
+
+.btn-primary:hover,
+.btn-success:hover,
+.btn-info:hover{
+    transform:scale(1.05);
+    
+}
+.box:hover{
+    transform:translateY(-8px);
+    border-color:#00e5ff;
+    box-shadow:
+        0 25px 50px rgba(0,0,0,0.55),
+        0 0 40px rgba(0,229,255,0.7);
+}
+.box input:hover{
+    transform:translateY(-3px);
+    border-color:#00e5ff;
+    box-shadow:
+        0 25px 50px rgba(0,0,0,0.55),
+        0 0 40px rgba(0,229,255,0.7);
+}
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(40px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.box{
+   
+    background:rgba(255,255,255,0.12);
+    backdrop-filter:blur(20px);
+
+    border:2px solid rgba(255,255,255,0.25);
+    border-radius:25px;
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,0.45),
+        0 0 25px rgba(0,183,255,0.35),
+        inset 0 0 1px rgba(255,255,255,0.5);
+
+    text-align:center;
+    transition:0.4s ease;
+}
+
+
+
+.password-box input{
+    width: 100%;
+    padding-right: 45px;
+}
+
+.toggle-password{
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 20px;
+    color: #666;
+    user-select: none;
+}
+
+.toggle-password:hover{
+    color: #007bff;
+}
+.a{
+
+}
 
     </style>
   </head>
   <body>
     {% include "quiz/navbar.html" %}
-    <div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <div class="card">
-                <form class="box" method="post">
-                    {% csrf_token %}
-                    <h1>Student Login</h1>
-                    <p class="text-muted"> Please enter your login and password!</p>
+    
+    
+     <div class="login-container">
+    <form class="box" method="post">
+        {% csrf_token %}
 
-                     {% render_field form.username class="form-control" placeholder="Username" %}
-                     {% render_field form.password class="form-control" placeholder="Password" %}
-
-                     <input type="submit" name="" value="Login">
-
-                </form>
-            </div>
+        <h1>STUDENT LOGIN</h1>
+       
+       <div class="a">
+        {% render_field form.username class="form-control" placeholder="Username" %}
+        {% render_field form.password class="form-control" placeholder="Password" %}
         </div>
-    </div>
-</div>
-<br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br>
+
+        <input type="submit" value="Login">
+
+        {% if messages %}
+            {% for message in messages %}
+                <p style="color:red">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    </form>
+</div>           
+   
+
+
+
+
 {% include "quiz/footer.html" %}
+
   </body>
 </html>

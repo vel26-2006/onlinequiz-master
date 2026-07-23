@@ -1,0 +1,11 @@
+{% extends 'student/studentbase.html' %}
+
+{% block content %}
+<div class="container text-center mt-5">
+    <h2>⚠️ You have already attempted this exam.</h2>
+    <br>
+    <a href="{% url 'student-dashboard' %}" class="btn btn-primary">
+        Back to Dashboard
+    </a>
+</div>
+{% endblock %}

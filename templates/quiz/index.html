@@ -3,26 +3,168 @@
 <html lang="en" dir="ltr">
 
 <style>
-  .jumbotron{
-    margin-bottom: 0px;
-  }
+ 
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+.card{
+    transition:.5s;
+}
+
+.card:hover{
+    transform:translateY(-15px);
+    box-shadow:0 20px 40px rgba(0,0,0,.3);
+}
+
+
+.logo-icon{
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-12px);}
+}
+html,body{
+    margin:0;
+    padding:0;
+    width:100%;
+    min-height:100%;
+    background:linear-gradient(135deg,#0f172a,#1e3a8a,#06b6d4);
+    background-attachment:fixed;
+    
+    transition:all 0.5s ease;
+    animation:fadeln 0.8s ease;
+}
+
+#section-jumbotron{
+    min-height:100vh;
+    width:100%;
+    background:transparent !important;
+}
+
+.container{
+    padding-top:20px;
+    padding-bottom:40px;
+}
+
+@keyframes bg{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    color:white;
+    padding:20px;
+     animation: fadeZoom 1.2s ease;
+}
+
+@keyframes fadeZoom{
+    from{
+        opacity:0;
+        transform:scale(0.9);
+    }
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+.hero h1{
+    font-size:60px;
+    font-weight:700;
+}
+
+.hero p{
+    font-size:22px;
+    margin:20px 0;
+}
+
+.btn-start{
+    display:inline-block;
+    padding:15px 40px;
+    background:#fff;
+    color:#0077ff;
+    text-decoration:none;
+    border-radius:50px;
+    font-weight:bold;
+    transition:.4s;
+}
+
+.btn-start:hover{
+   
+
+      transform:translateY(-5px) scale(1.05);
+    box-shadow:0 15px 30px rgba(144, 173, 236, 0.4);
+}
+
+
 </style>
 <body>
+  
   {% include "quiz/navbar.html" %}
 <br>
-<section id="section-jumbotron" class="jumbotron jumbotron-fluid d-flex justify-content-center align-items-center">
+<section class="hero">
+    <div class="container">
+
+        <h1>🎓 Online Quiz System</h1>
+
+        <p>
+            Learn • Practice • Achieve
+        </p>
+
+        <p style="max-width:700px;margin:auto;font-size:18px;">
+            Improve your knowledge with interactive quizzes.
+            Join thousands of students and test your skills with beautiful,
+            fast and responsive online exams.
+        </p>
+
+        <br>
+
+        <a href="/student/studentsignup" class="btn-start">
+            🚀 Start Your Journey
+        </a>
+
+        <br><br>
+
+        <div style="display:flex;justify-content:center;gap:20px;flex-wrap:wrap;">
+
+            <div class="card"
+            style="width:220px;padding:25px;border-radius:20px;background:rgba(255,255,255,.2);backdrop-filter:blur(10px);color:white;">
+                <h2>1000+</h2>
+                <p>Questions</p>
+            </div>
+
+            <div class="card"
+            style="width:220px;padding:25px;border-radius:20px;background:rgba(255,255,255,.2);backdrop-filter:blur(10px);color:white;">
+                <h2>100+</h2>
+                <p>Courses</p>
+            </div>
+
+            <div class="card"
+            style="width:220px;padding:25px;border-radius:20px;background:rgba(255,255,255,.2);backdrop-filter:blur(10px);color:white;">
+                <h2>24/7</h2>
+                <p>Available</p>
+            </div>
   <div class="container text-center">
-    <h1 class="display-1 text-info">Let's Quiz</h1>
-    <p class="display-4 d-none d-sm-block">Test your skills and become a master.</p>
-    <p class="lead">We organize quizzes on various topics.</p>
+    
 
     
 
-    <p class="lead">Sign up if you haven't already and get access to millions of quizzes on the topic of your interest.</p>
-    <p><strong> Start Your Journey Here:</strong></p>
-    <a href="/student/studentsignup" class="btn btn-lg btn-info" style="padding-right: 35px;"><i class="fa fa-user-plus" aria-hidden="true"></i> Sign Up</a>
     
-    <br><br><br>
+    
   </div>  
 </section>
   {% include "quiz/footer.html" %}

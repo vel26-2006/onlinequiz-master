@@ -14,12 +14,23 @@
 
     
     header {
-      position: fixed;
-      background: #22242A;
-      padding: 20px;
-      width: 100%;
-      z-index: 1;
-    }
+      position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:70px;
+    
+    backdrop-filter:blur(12px);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 20px;
+    z-index:10000;
+     background:rgba(15,23,42,.75);
+    backdrop-filter:blur(20px);
+    border-bottom:1px solid rgba(255,255,255,.1);
+}
+    
 
     .left_area h3 {
       color: #fff;
@@ -53,26 +64,31 @@
     }
 
     .sidebar {
-      background: #2f323a;
-      margin-top: 70px;
-      padding-top: 30px;
-      position: fixed;
-      left: 0;
-      width: 250px;
-      height: 100%;
-      transition: 0.5s;
-      transition-property: left;
-    }
+       position: fixed;
+    top: 70px;
+    left: 0;
+    width: 250px;
+    height: calc(100vh - 70px);
+    
+    z-index: 9999;
+    transition: left .4s ease;
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+    
 
     .sidebar .profile_image {
       width: 100px;
       height: 100px;
       border-radius: 100px;
       margin-bottom: 10px;
+      border:3px solid #3b82f6;
+    box-shadow:0 0 20px rgba(59,130,246,.5);
     }
 
     .sidebar h4 {
-      color: #ccc;
+      color: #fff;
       margin-top: 0;
       margin-bottom: 20px;
     }
@@ -90,7 +106,12 @@
     }
 
     .sidebar a:hover {
-      background: #19B3D3;
+      
+      transition: translatX(8px);
+      box-shadow: 0 0 15px rgba(37,99,235,4);
+         background:rgba(255,255,255,0.12);
+    border-left:4px solid #3b82f6;
+    color: rgb(133, 169, 223);
     }
 
     .sidebar i {
@@ -113,31 +134,33 @@
       color: #19B3D3;
     }
 
-    #check:checked~.sidebar {
-      left: -190px;
-    }
+   
 
-    #check:checked~.sidebar a span {
-      display: none;
-    }
-
-    #check:checked~.sidebar a {
-      font-size: 20px;
-      margin-left: 170px;
-      width: 80px;
-    }
+    
+   
 
     .content{
+        
+       
+       
     margin-left:250px;
+    
+    justify-content: center;
+    align-items: flex-start;
+    padding: 90px 30px 30px;
+    background: transparent;
+    color: #fff;
     min-height:100vh;
     width:calc(100% - 250px);
+   position: relative;
+   z-index: 1;
     overflow-x:hidden;
-    transition: 0.5s;
+    transition:all 0.5s ease;
+    animation:fadeln 0.8s ease;
 }
 
-    #check:checked~.content {
-      margin-left: 60px;
-    }
+
+    
 
     #check {
       display: none;
@@ -145,23 +168,37 @@
 
     @media (max-width:768px){
 
-.sidebar{
-    left:-250px;
-    width:250px;
+.sidebar {
+     left:0;
+}
+     
+
+
+#check:checked ~ header label #sidebar_btn{
+    left:20px;
+
+    
 }
 
-#check:checked ~ .sidebar{
-    left:0;
-}
+   
 
 .content{
-    margin-left:0;
-    padding:10px;
+        margin-left:0!important;
+        margin-top: 70px;
+        width: 100%;
+        padding: 15px;
+        transition: .3s;
 }
 
 #check:checked ~ .content{
     margin-left:0;
+    width: 100%;
 }
+
+#check:checked ~ .sidebar{
+    left:-250px;
+}
+
 
 label #sidebar_btn{
     left:20px;
@@ -200,20 +237,16 @@ label #sidebar_btn{
 }
 
 body{
-    margin: 0;
-    padding: 0;
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg,#4facfe,#00f2fe,#43e97b);
-    background-size: 400% 400%;
-    animation: bgMove 10s ease infinite;
-    min-height: 100vh;
+        margin:0;
+    padding:0;
+    font-family:'Poppins',sans-serif;
+    background:linear-gradient(135deg,#070c16,#153281,#5987e9);
+    background-attachment:fixed;
+    background-size:cover;
+    min-height:100vh;
 }
 
-@keyframes bgMove{
-    0%{background-position:0% 50%;}
-    50%{background-position:100% 50%;}
-    100%{background-position:0% 50%;}
-}
+
 
 .quiz-container{
     width:100%;
@@ -281,7 +314,7 @@ h1{
     transform:scale(1.2);
 }
 
-button{
+.content button{
     width:100%;
     padding:18px;
     border:none;
@@ -361,15 +394,27 @@ button:hover::before{
 }
 
 .card{
-    background:white;
+    border: none;
+
+    background:inherit;
     padding:20px;
     border-radius:20px;
     box-shadow:0 15px 40px rgba(0,0,0,.15);
-    transition:.4s;
+    transition:.35s;
+    
+    
 }
 
+.row{
+    gap: 25px;
+}
+
+
+
 .card:hover{
-    transform:translateY(-8px) rotate(.5deg);
+   transform: translateY(-8px) scale(1.03);
+        box-shadow:0 15px 35px rgba(0,0,0,.25);
+        
 }
 
 img{
@@ -427,7 +472,7 @@ body{
   <!--header area start-->
   <header>
     <label for="check">
-      <i style="left: 200px;margin-top: 17px;"class="fas fa-bars" id="sidebar_btn"></i>
+     <i class="fas fa-bars" id="sidebar_btn"></i>
     </label>
     <div class="left_area">
       <h3>Online Quiz</h3>
@@ -460,7 +505,7 @@ body{
 
   <!--content start-->
   <div class="content">
-    <br><br><br><br><br>
+    
     {% block content %}
 
     {% endblock content %}

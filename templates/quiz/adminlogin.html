@@ -12,18 +12,37 @@
     background: linear-gradient(to right, #b92b27, #1565c0)
 }
 
-.box {
-    width: 500px;
-    padding: 40px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    background: #191919;
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background: linear-gradient(to right, #b92b27, #1565c0);
+    
+} 
 
-    text-align: center;
-    transition: 0.25s;
-    margin-top: 100px
+.box {
+    width:500px;
+    padding:40px;
+    margin:0;
+    position:relative;
+    top:0;
+    left:0;
+    transform:none;
+
+    background:rgba(25, 149, 221, 0.068);
+    backdrop-filter:blur(20px);
+    border:3px solid rgba(255, 255, 255, 0.445);
+    border-radius:25px;
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.45),
+        0 0 25px rgba(0,183,255,.35);
+
+    text-align:center;
+    transition:.4s ease;
+    
 }
+
 
 .box input[type="text"],
 .box input[type="password"] {
@@ -36,13 +55,13 @@
     padding: 10px 10px;
     width: 250px;
     outline: none;
-    color: white;
+    color: rgba(5, 1, 1, 0.74);
     border-radius: 24px;
     transition: 0.25s
 }
 
 .box h1 {
-    color: white;
+    color:#fff !important;
     text-transform: uppercase;
     font-weight: 500
 }
@@ -50,7 +69,9 @@
 .box input[type="text"]:focus,
 .box input[type="password"]:focus {
     width: 300px;
-    border-color: #2ecc71
+    border-color: #0f1761c9;
+    color: white;
+    
 }
 
 .box input[type="submit"] {
@@ -59,46 +80,110 @@
     display: block;
     margin: 20px auto;
     text-align: center;
-    border: 2px solid #2ecc71;
+    border: 2px solid #163ca3;
     padding: 14px 40px;
     outline: none;
-    color: white;
+    color: rgb(0, 0, 0);
     border-radius: 24px;
     transition: 0.25s;
     cursor: pointer
 }
 
 .box input[type="submit"]:hover {
-    background: #2ecc71
+    background: #07145f
 }
 
+body{
+    background:linear-gradient(135deg,#12244dbb,#1e3a8a,#06b6d4);
+    min-height:100vh;
+}
+
+
+   
+
+.form-control{
+    border-radius:12px;
+    height:50px;
+}
+
+.btn-primary,
+.btn-success,
+.btn-info{
+    border-radius:30px;
+    padding:12px;
+    transition:.3s;
+}
+
+.btn-primary:hover,
+.btn-success:hover,
+.btn-info:hover{
+    transform:scale(1.05);
+}
+.box:hover{
+    transform:translateY(-8px);
+    border-color:#00e5ff;
+    box-shadow:
+        0 25px 50px rgba(0,0,0,0.55),
+        0 0 40px rgba(0,229,255,0.7);
+}
+.box input:hover{
+    transform:translateY(-3px);
+    border-color:#00e5ff;
+    box-shadow:
+        0 25px 50px rgba(0,0,0,0.55),
+        0 0 40px rgba(0,229,255,0.7);
+}
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(40px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+
+
+.login-container{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:calc(100vh - 80px);
+    
+}
 
     </style>
   </head>
   <body>
     {% include "quiz/navbar.html" %}
-    <div class="container">
+    <div class="login-container">
     <div class="row">
         <div class="col-md-6">
-            <div class="card">
+            
                 <form class="box" method="post">
                     {% csrf_token %}
                     <h1>Admin Login</h1>
-                    <p class="text-muted"> Please enter your login and password!</p>
+                    
 
-                     {% render_field form.username class="form-control" placeholder="Username" %}
-                     {% render_field form.password class="form-control" placeholder="Password" %}
+                    <input type="text" name="username" class="form-control" placeholder="Username" required style="background-color: #ffffff91; color: black;">
 
-                     <input type="submit" name="" value="Login">
+<input type="password" name="password" class="form-control" placeholder="Password" required style="background-color: #ffffff91; color: black;" >
 
+                     <input type="submit" name="" value="Login" style="background-color: #081f838c;">
+                   
+                     {% if messages %}
+    {% for message in messages %}
+        <p style="color:red">{{ message }}</p>
+    {% endfor %}
+{% endif %}
                 </form>
-            </div>
+        
         </div>
     </div>
 </div>
-<br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br>
+
 {% include "quiz/footer.html" %}
   </body>
 </html>

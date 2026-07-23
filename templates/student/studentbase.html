@@ -1,274 +1,268 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="en" dir="ltr">
+<html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
- 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style media="screen">
-    a:link {
-      text-decoration: none;
-    }
+    <title>Student Dashboard</title>
 
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: "Gill Sans", sans-serif;;
-    }
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-    header {
-      position: fixed;
-      background: #22242A;
-      padding: 20px;
-      width: 100%;
-      z-index: 1;
-    }
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial,sans-serif;
+        }
 
-    .left_area h3 {
-      color: #fff;
-      margin: 0px;
-      text-transform: uppercase;
-      font-size: 22px;
-      font-weight: 900;
-    }
+        body{
+            background:#0f172a;
+            overflow-x:hidden;
+        }
 
-    .left_area span {
-      color: #19B3D3;
-    }
+        #check{
+            display:none;
+        }
 
-    .logout_btn {
-      padding: 5px;
-      background: #19B3D3;
-      text-decoration: none;
-      float: right;
-      margin-top: -30px;
-      margin-right: 40px;
-      border-radius: 2px;
-      font-size: 15px;
-      font-weight: 600;
-      color: #fff;
-      transition: 0.5s;
-
-    }
-
-    .logout_btn:hover {
-      background: #0B87A6;
-    }
-
-    .sidebar {
-      background: #2f323a;
-      margin-top: 70px;
-      padding-top: 30px;
-      position: fixed;
-      left: 0;
-      width: 250px;
-      height: 100%;
-      transition: 0.5s;
-      transition-property: left;
-    }
-
-    .sidebar .profile_image {
-      width: 100px;
-      height: 100px;
-      border-radius: 100px;
-      margin-bottom: 10px;
-    }
-
-    .sidebar h4 {
-      color: #ccc;
-      margin-top: 0;
-      
-    }
-
-    .sidebar a {
-      color: #fff;
-      display: block;
-      width: 100%;
-      line-height: 60px;
-      text-decoration: none;
-      padding-left: 40px;
-      box-sizing: border-box;
-      transition: 0.5s;
-
-    }
-
-    .sidebar a:hover {
-      background: #19B3D3;
-    }
-
-    .sidebar i {
-      padding-right: 10px;
-    }
-
-    label #sidebar_btn {
-      z-index: 1;
-      color: #fff;
-      position: fixed;
-      cursor: pointer;
-      left: 300px;
-      font-size: 20px;
-      margin: 5px 0;
-      transition: 0.5s;
-      transition-property: color;
-    }
-
-    label #sidebar_btn:hover {
-      color: #19B3D3;
-    }
-
-    #check:checked~.sidebar {
-      left: -190px;
-    }
-
-    #check:checked~.sidebar a span {
-      display: none;
-    }
-
-    #check:checked~.sidebar a {
-      font-size: 20px;
-      margin-left: 170px;
-      width: 80px;
-    }
-
-    .content {
-      margin-left: 250px;
-      background: url(background.png) no-repeat;
-      background-position: center;
-      background-size: cover;
-      height: 100vh;
-      transition: 0.5s;
-    }
-
-    #check:checked~.content {
-      margin-left: 60px;
-    }
-
-    #check {
-      display: none;
-    }
-    @media (max-width:768px){
-
-.sidebar{
-    left:-250px;
-    width:250px;
+       header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(12px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 25px;
+    z-index: 1000;
 }
 
-#check:checked ~ .sidebar{
-    left:0;
+.left_area{
+    display:flex;
+    align-items:center;
+    gap:15px;
+   
 }
 
-.content{
-    margin-left:0;
-    padding:10px;
-}
-
-#check:checked ~ .content{
-    margin-left:0;
-}
-
-label #sidebar_btn{
-    left:20px;
-}
-
-.left_area h3{
-    font-size:18px;
+.right_area{
+    display:flex;
+    align-items:center;
+    margin-left:auto;
+     color: aliceblue;
 }
 
 .logout_btn{
-    margin-right:15px;
-    font-size:12px;
-    padding:5px 10px;
+   background:#19B3D3;
+    color:#fff;
+    padding:10px 22px;
+    border-radius:8px;
+    text-decoration:none;
+    transition:.3s;
 }
-
-.sidebar a{
-    font-size:16px;
-}
-
-.sidebar .profile_image{
-    width:70px;
-    height:70px;
-}
-
-}
-
-@media (max-width:768px){
 
 .content{
-    margin-left:0;
-    width:100%;
-    min-height:100vh;
-    overflow-x:hidden;
-    padding:15px;
+    margin-top: 100px;   /* Navbar height */
+    margin-left: 250px;
+    padding: 30px;
 }
 
-body{
-    overflow-x:hidden;
+.left_area h3{
+    color: #fff;
+    font-weight: bold;
+    font-size: 30px;
 }
 
-.sidebar{
-    left:-250px;
+
+.logout_btn:hover{
+    
+      background:#0ea5e9;
+    transform:translateY(-2px);
+    box-shadow:0 0 15px rgba(14,165,233,.5);
 }
 
-#check:checked ~ .sidebar{
-    left:0;
+
+
+        .sidebar{
+            position:fixed;
+            top:70px;
+            left:0;
+            width:250px;
+            height:calc(100vh - 70px);
+            background:#2f323a;
+            padding-top:20px;
+            transition:.3s;
+            overflow-y:auto;
+        }
+
+        .sidebar center{
+            margin-bottom:20px;
+        }
+
+        .profile_image{
+            width:90px;
+            height:90px;
+            border-radius:50%;
+        }
+
+        .sidebar h4,
+        .sidebar h6{
+            color:#fff;
+            margin-top:10px;
+        }
+
+        .sidebar a{
+            display:block;
+            color:#fff;
+            text-decoration:none;
+            padding:15px 25px;
+        }
+
+        .sidebar a:hover{
+            background:#2563eb;
+             transform:translateY(-2px);
+              box-shadow:0 0 15px rgba(14,165,233,.5);
+            color: white;
+        }
+
+        
+        @media (max-width:768px){
+
+        .sidebar{
+            left:-250px;
+        }
+
+        #check:checked ~ .sidebar{
+            left:0;
+        }
+
+        .content{
+            margin-left:0;
+            padding:20px;
+        }
+
+        .left_area h3{
+            font-size:20px;
+        }
+
+        .logout_btn{
+            padding:6px 12px;
+            font-size:14px;
+        }
+    }
+
+    #sidebar_btn{
+     color: #fff;
+    font-size: 26px;
+    cursor: pointer;
+    margin-right: 15px;
 }
 
+.right_area{
+    margin-left:auto;
+    display:flex;
+    align-items:center;
 }
-  </style>
 
+.container{
+   
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+     width:90%;
+    max-width:1100px;   
+    margin:40px auto;
+    padding:35px;
+    background:#fff;
+    border-radius:15px;
+    box-shadow:0 10px 30px rgba(0,0,0,.3);
+}
+@media (max-width:768px){
 
+    .right_area{
+        margin-left:auto;
+    }
+
+    .logout_btn{
+        padding:6px 10px;
+        font-size:12px;
+    }
+}
+
+@media (min-width:769px){
+
+    .sidebar{
+        left:0;
+    }
+
+    .content{
+        margin-left:250px;
+    }
+
+    #sidebar_btn{
+        display:none;
+    }
+}
+
+    </style>
 
 </head>
 
 <body>
 
-  <input type="checkbox" id="check">
-  <!--header area start-->
-  <header>
-    <label for="check">
-      <i style="left: 200px;margin-top: 17px;"class="fas fa-bars" id="sidebar_btn"></i>
-    </label>
+<input type="checkbox" id="check">
+
+<header>
+
     <div class="left_area">
-      <h3>Online Quiz</h3>
+        <label for="check">
+            <i class="fas fa-bars" id="sidebar_btn"></i>
+        </label>
+
+        <h3>online quiz</h3>
     </div>
+
     <div class="right_area">
-      <a href="/logout" class="logout_btn">Logout</a>
-    </div>
-  </header>
-  <!--header area end-->
-  <!--sidebar start-->
-  <div class="sidebar">
+    <a href="/logout" class="logout_btn">Logout</a>
+</div>
+   
+
+</header>
+
+<div class="sidebar">
+
     <center>
+        <img src="{% static 'image/student.png' %}" class="profile_image">
 
-      <img src="{% static "image/student.png" %}" class="profile_image" alt="">
-      <h4>{{request.user.first_name}}</h4>
-      <h6 style="color: rgb(255, 255, 255);">( Student )</h6>
-
+        <h4>{{ request.user.first_name }}</h4>
+        <h6>( Student )</h6>
     </center>
 
-    <a href="/student/student-dashboard"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a>
-    <a href="/student/student-exam"><i class="fas fa-book"></i><span>Exam</span></a>
-    <a href="/student/student-marks"><i class="fas fa-sort-numeric-up"></i><span>Marks</span></a>
-  </div>
-  <!--sidebar end-->
+    <a href="/student/student-dashboard">
+        <i class="fas fa-home"></i> Dashboard
+    </a>
 
+    <a href="/student/student-exam">
+        <i class="fas fa-book"></i> Exam
+    </a>
 
-  <!--content start-->
-  <div class="content">
-    <br><br><br><br><br>
+    <a href="/student/student-marks">
+        <i class="fas fa-chart-line"></i> Marks
+    </a>
+
+</div>
+
+<div class="content">
+
     {% block content %}
-
     {% endblock content %}
 
-
-    <br><br><br>
     {% include "quiz/footer.html" %}
-  </div>
-  <!--content end-->
-</body>
 
+</div>
+
+</body>
 </html>

@@ -37,6 +37,9 @@
         background: #663a30;
       }
   
+
+
+      
   
       .card {
         
@@ -67,40 +70,179 @@
       left: 0px;
       right: 0px;
     }
-    </style>
+
+body{
+    background: linear-gradient(135deg,#0f172a,#1e3a8a,#06b6d4);
+    min-height:100vh;
+    margin:0;
+    padding:30px;
+}
+
+.container{
+    
+   width: 100%;
+   max-width: 100%;
+   margin: 0 auto;
+}
+
+.dashboard-title{
+    text-align:center;
+    color:#fff;
+    font-size:38px;
+    font-weight:bold;
+    margin-bottom:30px;
+}
+
+
+.sidebar{
+    position: fixed;
+    top: 70px;
+    left: -250px;
+    width: 250px;
+    height: calc(100vh - 70px);
+
+    background: rgba(10, 15, 25, 0.65);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    border-right: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 8px 0 25px rgba(0,0,0,0.45);
+
+    transition: all .35s ease;
+    z-index: 999;
+}
+
+
+/* PC View */
+@media (min-width:769px){
+
+.sidebar{
+    left:0 !important;
+}
+
+.content{
+    margin-left:250px !important;
+    width:calc(100% - 250px);
+}
+
+#sidebar_btn{
+    display:none;
+}
+
+}
+.welcome-card{
+    background:rgba(255,255,255,.15);
+    backdrop-filter:blur(15px);
+    border-radius:20px;
+    padding:30px;
+    color:#fff;
+    text-align:center;
+    margin-bottom:30px;
+    box-shadow:0 10px 25px rgba(0,0,0,.3);
+}
+
+.result-card{
+    background:linear-gradient(135deg,#2563eb,#06b6d4);
+    color:#fff;
+    border-radius:20px;
+    padding:30px;
+    text-align:center;
+    margin-bottom:30px;
+    box-shadow:0 10px 25px rgba(0,0,0,.3);
+}
+
+.order-card{
+    background:rgba(255,255,255,.15);
+    backdrop-filter:blur(15px);
+    border-radius:20px;
+    color:#fff;
+    border:none;
+    transition:.3s;
+}
+
+.order-card:hover{
+    transform:translateY(-8px);
+}
+
+.card-block{
+    padding:30px;
+}
+
+.card-block h2{
+    font-size:40px;
+    font-weight:bold;
+}
+
+.card-block h6{
+    font-size:20px;
+}
+
+.row{
+    margin-left: 0;
+    margin-right: 0;
+}
+       </style>
   </head>
-<br><br>
+<div class="container-fluid">
 
-  <div class="container">
-    <div class="row">
-      
-  
-      <div class="col-md-4 col-xl-6">
-        <div class="card bg-c-yellow order-card">
-          <div class="card-block">
-            <h6 class="m-b-20">Total Exams Available</h6>
-           <h2 class="text-right"><i class="fas fa-book f-left"></i><span>{{total_course}}</span></h2>
-            
-          </div>
+    <h2 class="dashboard-title text-center mb-4">
+        🎓 Student Dashboard
+    </h2>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+
+            <div class="welcome-card text-center mb-4">
+                <h2>👋 Welcome, {{ request.user.first_name }}!</h2>
+
+                <a href="{% url 'student-exam' %}" class="btn btn-primary m-2">
+                    📝 Take Exam
+                </a>
+
+                <a href="{% url 'student-marks' %}" class="btn btn-success m-2">
+                    📊 View Marks
+                </a>
+            </div>
+
+            {% if result %}
+            <div class="result-card mb-4">
+                <h3>🎉 Latest Result</h3>
+                <h1>🏆 Score : {{ result.marks }}</h1>
+                <h4>📄 Exam : {{ result.exam.course_name }}</h4>
+            </div>
+            {% endif %}
+
+            <div class="row">
+
+                <div class="col-md-6 mb-4">
+                    <div class="card order-card">
+                        <div class="card-block">
+                            <h6>Total Exams Available</h6>
+                            <h2>{{ total_course }}</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-4">
+                    <div class="card order-card">
+                        <div class="card-block">
+                            <h6>Total Questions</h6>
+                            <h2>{{ total_question }}</h2>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
-      </div>
-  
-      <div class="col-md-4 col-xl-6">
-        <div class="card bg-c-pink order-card">
-          <div class="card-block">
-            <h6 class="m-b-20">Total Questions</h6>
-            <h2 class="text-right"><i class="fas fa-question-circle f-left"></i><span>{{total_question}}</span></h2>
-            
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
+
+</div>
 
 
-<br><br><br><br><br><br><br><br><br><br>
 
 <script src="http://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
 
 
 {% endblock content %}
+

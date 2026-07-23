@@ -3,9 +3,8 @@
 {%load static%}
 
 <head>
-  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+ 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
   <style media="screen">
     a:link {
@@ -19,36 +18,194 @@
     .row {
       margin: 100px;
     }
+
+
+    a{
+    text-decoration:none;
+}
+
+.course-title{
+    color:#fff;
+    text-align:center;
+    font-size:32px;
+    font-weight:700;
+    margin-bottom:25px;
+    animation:fadeDown .8s ease;
+}
+.container{
+    
+    max-width:1100px;
+    margin:40px auto;
+    padding:0 20px;
+    display: flex;
+    justify-content: center;
+
+}
+
+.course-card{
+   width:100%;
+   max-width: 1000px;
+   margin:  auto;
+    padding:30px;
+    border-radius:20px;
+    background:rgba(15,23,42,.75);
+    backdrop-filter:blur(15px);
+    box-shadow:0 10px 30px rgba(0,0,0,.35);
+
+    animation: cardIn .8s ease;
+}
+@keyframes cardIn{
+    from{
+        opacity:0;
+        transform:translateY(40px) scale(.95);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+.table{
+     width:100% !important;
+    table-layout:fixed;
+}
+
+.table th,
+.table td{
+    text-align:center;
+    padding:16px;
+    font-size:16px;
+}
+
+.table th:nth-child(1),
+.table td:nth-child(1){
+    width:35%;
+}
+
+.table th:nth-child(2),
+.table td:nth-child(2){
+    width:25%;
+}
+
+.table th:nth-child(3),
+.table td:nth-child(3){
+    width:25%;
+}
+
+.table th:nth-child(4),
+.table td:nth-child(4){
+    width:15%;
+}
+
+
+
+
+.table thead th{
+    background:#2563eb !important;
+    color:#fff !important;
+    font-size:16px;
+    border:none !important;
+    padding:15px !important;
+}
+
+.table tbody tr{
+    background:#334155 !important;
+}
+
+.table tbody td{
+    color:#fff !important;
+    border:none !important;
+    padding:15px !important;
+    vertical-align:middle;
+}
+
+.table tbody tr:hover{
+    background:#475569 !important;
+}
+
+.btn-danger{
+    border-radius:10px;
+    padding:6px 12px;
+}
+
+.btn-danger:hover{
+    transform:scale(1.1);
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@media(max-width:768px){
+
+.course-card{
+    padding:15px;
+    overflow-x:auto;
+}
+
+.table{
+    min-width:700px;
+}
+
+.course-title{
+    font-size:22px;
+}
+
+}
   </style>
 </head>
 <br><br>
+
 <div class="container">
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h6 class="panel-title">Courses</h6>
+
+    <div class="course-card">
+
+        <h2 class="course-title">
+            <i class="fas fa-book"></i>
+            Courses
+        </h2>
+
+        <table class="table">
+
+            <thead>
+                <tr>
+                    <th>Course Name</th>
+                    <th>Total Questions</th>
+                    <th>Total Marks</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for t in courses %}
+                <tr>
+
+                    <td>{{t.course_name}}</td>
+                    <td>{{t.question_number}}</td>
+                    <td>{{t.total_marks}}</td>
+
+                    <td>
+                        <a href="{% url 'delete-course' t.id %}" class="btn btn-danger btn-sm">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </td>
+
+                </tr>
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
     </div>
-    <table class="table table-hover" id="dev-table">
-      <thead>
-        <tr>
 
-          <th>Course Name</th>
-          <th>Total Question</th>
-          <th>Total Marks</th>
-          <th>Delete</th>
-        </tr>
-      </thead>
-      {% for t in courses %}
-      <tr>
-
-        <td> {{t.course_name}}</td>
-        <td>{{t.question_number}}</td>
-        <td>{{t.total_marks}}</td>
-        
-        <td><a class="btn btn-danger btn-xs" href="{% url 'delete-course' t.id  %}"><span class="glyphicon glyphicon-trash"></span></a></td>
-      </tr>
-      {% endfor %}
-    </table>
-  </div>
 </div>
 
 <br><br><br><br><br><br>

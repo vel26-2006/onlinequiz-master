@@ -4,7 +4,53 @@
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<style>
+ body{
+    background:linear-gradient(135deg,#0f172a,#2563eb,#06b6d4);
+    min-height:100vh;
+}
 
+.contact-card{
+    width:600px;
+    max-width:90%;
+    margin:40px auto;
+    padding:35px;
+    background:rgba(255,255,255,.15);
+    backdrop-filter:blur(10px);
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.3);
+}
+
+.contact-card h2{
+    color:white;
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.contact-card input,
+.contact-card textarea{
+    width:100%;
+    padding:12px;
+    border-radius:10px;
+    border:none;
+    margin-bottom:20px;   /* 80px → 20px */
+    background:rgba(200, 211, 216, 0.596);
+    color: rgba(0, 0, 0, 0.788);
+}
+
+.contact-card textarea{
+    min-height:120px;
+    resize:vertical;
+}
+
+.contact-card .btn{
+    width:100%;
+    border-radius:10px;
+    padding:12px;
+    font-size:18px;
+    margin-top:10px;
+}
+</style>
 
 
 
@@ -15,21 +61,21 @@
   {% include "quiz/navbar.html" %}
   <br><br>
 
-  <center>
-    <h3 class='alert alert-success'>Send Us Your Valuable Feedback !</h3>
+  
+   <div class="contact-card">
+    <h2>📩 Feed Back</h2>
 
     <form method="POST" autocomplete="off">
-      <!-- Very Important csrf Token -->
-      {% csrf_token %}
-      <div class="form-group">
-        <p>
-        <h3>{{ form.as_p }}</h3>
-        </p>
-        <br>
-        <input type="submit" value="Send Message" class='btn btn-primary btn-lg'>
-      </div>
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit" class="btn btn-primary">
+            🚀 Send Message
+        </button>
     </form>
-  </center>
+</div>
+  
 
   {% include "quiz/footer.html" %}
 </body>
