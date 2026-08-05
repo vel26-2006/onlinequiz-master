@@ -24,6 +24,12 @@
     text-decoration:none;
 }
 
+body{
+    animation: pageFade 0.8s ease;
+}
+
+
+
 .course-title{
     color:#fff;
     text-align:center;
@@ -142,27 +148,65 @@
     }
 }
 
-@media(max-width:768px){
+@media (max-width:768px){
 
 .course-card{
-    padding:15px;
-    overflow-x:auto;
+    padding:10px;
+    overflow:hidden;
 }
 
 .table{
-    min-width:700px;
+    width:100% !important;
+    min-width:100% !important;
+    table-layout:auto;
 }
 
-.course-title{
-    font-size:22px;
+.table th,
+.table td{
+    font-size:12px;
+    padding:6px;
+    white-space:normal;
+    word-break:break-word;
 }
 
+.table-responsive{
+    overflow-x:hidden;
 }
+}
+
+table{
+    width:100%;
+    min-width:650px;   
+}
+@media (max-width:768px){
+
+.table-responsive{
+    width:100%;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+}
+
+table{
+    width:100%;
+    font-size:13px;
+}
+
+th,td{
+    padding:8px;
+    white-space:nowrap;
+}
+
+.card{
+    width:100%;
+    overflow:hidden;
+}
+}
+
   </style>
 </head>
 <br><br>
 
-<div class="container">
+<div class="container-fluid">
 
     <div class="course-card">
 
@@ -170,8 +214,8 @@
             <i class="fas fa-book"></i>
             Courses
         </h2>
-
-        <table class="table">
+        <div class="table-responsive">
+        <table class="table table-bordered">
 
             <thead>
                 <tr>
@@ -203,7 +247,7 @@
             </tbody>
 
         </table>
-
+</div>
     </div>
 
 </div>

@@ -3,6 +3,10 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <title></title>
     <style media="screen">
       body {
@@ -146,6 +150,9 @@ body{
 
 
 
+
+
+
 .login-container{
     display:flex;
     justify-content:center;
@@ -154,6 +161,46 @@ body{
     
 }
 
+
+@media (max-width:768px){
+
+    .login-container{
+        min-height:100vh;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        padding:20px;
+    }
+
+    .box{
+        width:100%;
+        max-width:500px;
+        padding:50px 30px;
+        border-radius:28px;
+    }
+
+    .box h1{
+        font-size:48px;
+        margin-bottom:40px;
+    }
+
+    .box input[type="text"],
+    .box input[type="password"]{
+        width:100%;
+        height:40px;
+        font-size:18px;
+        margin:22px 0;
+    }
+
+    .box input[type="submit"]{
+        text-align: center;
+        width:160px;
+        height:60px;
+        font-size:20px;
+        margin:35px auto 0;
+        display:block;
+    }
+}
     </style>
   </head>
   <body>
@@ -171,7 +218,7 @@ body{
 
 <input type="password" name="password" class="form-control" placeholder="Password" required style="background-color: #ffffff91; color: black;" >
 
-                     <input type="submit" name="" value="Login" style="background-color: #081f838c;">
+                     <input type="submit" name="" value="Login" style="background-color: #081f838c;",text-center>
                    
                      {% if messages %}
     {% for message in messages %}

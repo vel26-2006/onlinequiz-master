@@ -121,7 +121,8 @@
     label #sidebar_btn {
       z-index: 1;
       color: #fff;
-      position: fixed;
+      position: static;
+      margin-right: 15px;
       cursor: pointer;
       left: 300px;
       font-size: 20px;
@@ -130,6 +131,12 @@
       transition-property: color;
     }
 
+
+    .left_area{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
     label #sidebar_btn:hover {
       color: #19B3D3;
     }
@@ -169,7 +176,7 @@
     @media (max-width:768px){
 
 .sidebar {
-     left:0;
+     left:-250;
 }
      
 
@@ -195,8 +202,12 @@
     width: 100%;
 }
 
-#check:checked ~ .sidebar{
+#check:not(:checked) ~ .sidebar{
     left:-250px;
+}
+
+#check:checked ~ .sidebar{
+    left:0;
 }
 
 

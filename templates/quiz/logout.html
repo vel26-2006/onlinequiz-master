@@ -1,19 +1,86 @@
-{%load static%}
+{% load static %}
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
-    {% include "quiz/navbar.html" %}
-    <br><br><br><br><br>
-<img src="{% static "image/logout_img.png" %}"  style="width:800px; height:100px; padding-left:400px;">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logout</title>
 
-<br><br><br><br><br>
-<br><br><br><br><br>
-<br><br>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins',sans-serif;
+        }
+
+        body{
+            background:linear-gradient(135deg,#081229,#1e3a8a,#0ea5e9);
+            min-height:100vh;
+            display:flex;
+            flex-direction:column;
+        }
+
+        .logout-box{
+            width:450px;
+            max-width:90%;
+            margin:120px auto;
+            background:rgba(255,255,255,.08);
+            backdrop-filter:blur(20px);
+            border-radius:20px;
+            padding:40px;
+            text-align:center;
+            box-shadow:0 20px 50px rgba(0,0,0,.35);
+        }
+
+        .logout-box img{
+            width:130px;
+            margin-bottom:20px;
+        }
+
+        .logout-box h2{
+            color:#fff;
+            margin-bottom:10px;
+        }
+
+        .logout-box p{
+            color:#dbeafe;
+            margin-bottom:25px;
+        }
+
+        .btn-home{
+            display:inline-block;
+            padding:12px 30px;
+            background:#0ea5e9;
+            color:#fff;
+            text-decoration:none;
+            border-radius:30px;
+            font-weight:bold;
+        }
+
+        .btn-home:hover{
+            background:#0284c7;
+        }
+    </style>
+</head>
+
+<body>
+
+{% include "quiz/navbar.html" %}
+
+<div class="logout-box">
+
+    <img src="{% static 'image/logout_img.png' %}" alt="Logout">
+
+    <h2>Logged Out Successfully</h2>
+
+    <p>Thank you for using the Online Quiz System.</p>
+
+    <a href="/" class="btn-home">🏠 Back to Home</a>
+
+</div>
+
 {% include "quiz/footer.html" %}
 
-  </body>
+</body>
 </html>

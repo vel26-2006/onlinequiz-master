@@ -10,10 +10,9 @@
   
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet">
+   
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    
     <style type="text/css">
 
       a:link {
@@ -75,16 +74,7 @@
     margin-bottom:20px;
 }
 
-@media (max-width:768px){
-    .container{
-        padding-left:15px;
-        padding-right:15px;
-    }
 
-    .col-12{
-        margin-bottom:20px;
-    }
-}
 .container-fluid{
     margin-top: 10px;
     
@@ -149,21 +139,31 @@
     margin-top:30px;
     overflow-x:auto;
     box-shadow:0 8px 20px rgba(0,0,0,.3);
+     -webkit-overflow-scrolling:touch;
+
+       width:100% !important;
+    min-width:100% !important;
+    table-layout:auto !important;
 }
 
 /* Table */
-.results-card table{
-    width:100%;
-    border-collapse:collapse;
-    min-width:600px;
+.results-card{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
 }
 
-.results-card th,
-.results-card td{
-    padding:12px;
-    text-align:center;
-    border:1px solid rgba(255,255,255,.2);
-    color:#fff;
+.results-card table{
+    width:100%;
+    min-width:100%;
+    border-collapse:collapse;
+}
+
+.results-card .table th,
+.results-card .table td{
+    font-size:12px;
+    padding:6px;
+    white-space:normal;
+    word-break:break-word;
 }
 
 .results-card th{
@@ -183,19 +183,33 @@
 /* Mobile Responsive */
 @media (max-width:768px){
 
-    .results-card{
-        padding:10px;
+.content{
+    margin-left:0 !important;
+    width:100% !important;
+    padding:80px 10px 20px;
+    }
     }
 
-    .results-card table{
-        min-width:500px;
-        font-size:14px;
-    }
-
-    .results-card h3{
-        font-size:20px;
-    }
+.results-card{
+    padding:12px;
 }
+
+.results-card h3{
+    font-size:22px;
+}
+
+.results-card table{
+    min-width:550px;
+}
+
+.results-card th,
+.results-card td{
+    font-size:13px;
+    padding:8px;
+}
+
+
+
 
 .results-card{
     background: linear-gradient(135deg,#1e293b,#576880);
@@ -219,6 +233,23 @@
 .rank{
     font-weight: 600;
     color: gold;
+}
+
+
+
+.left_area{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+
+.content{
+    margin-left:250px;
+    width:calc(100% - 250px);
+    min-height:100vh;
+    padding:90px 20px 20px;
+    overflow-x:auto;
 }
 
 
@@ -268,7 +299,8 @@
 <div class="container mt-4">
     <div class="results-card">
     <h3><i class="fas fa-trophy"></i> Latest Student Results</h3>
-    <table class="table table-bordered table-striped">
+     <div class="table-responsive">
+    <table class="table table-bordered table-striped mb-0">
         <thead>
             <tr>
                 <th>Student</th>
@@ -296,6 +328,7 @@
             {% endfor %}
         </tbody>
     </table>
+    </div>
     </div>
 </div>
     </div>

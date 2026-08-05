@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en" dir="ltr">
-
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
 <style>
  
   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
@@ -110,8 +113,63 @@ html,body{
     box-shadow:0 15px 30px rgba(144, 173, 236, 0.4);
 }
 
+/* Mobile Responsive */
+@media (max-width:768px){
+
+    .container{
+        width:100%;
+        padding:20px 15px;
+    }
+
+    .hero{
+        min-height:auto;
+        padding:100px 15px 40px;
+    }
+
+    .hero h1{
+        font-size:38px;
+        line-height:1.2;
+    }
+
+    .hero p{
+        font-size:16px;
+        line-height:1.6;
+    }
+
+    .btn-start{
+        display:block;
+        width:100%;
+        max-width:280px;
+        margin:20px auto;
+        text-align:center;
+        padding:14px;
+    }
+
+    .hero > .container > div{
+        display:flex !important;
+        flex-direction:column;
+        align-items:center;
+        gap:15px;
+    }
+
+    .card{
+        width:100% !important;
+        max-width:280px;
+        margin:0 auto;
+    }
+
+    body{
+        overflow-x:hidden;
+    }
+}
+
+
+
+
 
 </style>
+
+</head>
 <body>
   
   {% include "quiz/navbar.html" %}
@@ -119,11 +177,13 @@ html,body{
 <section class="hero">
     <div class="container">
 
-        <h1>🎓 Online Quiz System</h1>
+       <h1 data-aos="fade-up">
+    🎓 Online Quiz System
+</h1>
 
-        <p>
-            Learn • Practice • Achieve
-        </p>
+       <p data-aos="fade-up" data-aos-delay="200">
+    Learn • Practice • Achieve
+</p>
 
         <p style="max-width:700px;margin:auto;font-size:18px;">
             Improve your knowledge with interactive quizzes.
@@ -132,10 +192,12 @@ html,body{
         </p>
 
         <br>
-
-        <a href="/student/studentsignup" class="btn-start">
-            🚀 Start Your Journey
-        </a>
+<a href="/student/studentsignup"
+   class="btn-start"
+   data-aos="zoom-in"
+   data-aos-delay="400">
+   🚀 Start Your Journey
+</a>
 
         <br><br>
 
@@ -158,18 +220,21 @@ html,body{
                 <h2>24/7</h2>
                 <p>Available</p>
             </div>
-  <div class="container text-center">
-    
-
-    
-
-    
-    
-  </div>  
+  
 </section>
   {% include "quiz/footer.html" %}
 
 
 </body>
+
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+<script>
+AOS.init({
+    duration: 1000,
+    once: true,
+    offset: 100
+});
+</script>
 
 </html>

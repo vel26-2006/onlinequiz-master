@@ -25,14 +25,7 @@ from django.shortcuts import redirect, get_object_or_404
 from .models import Course, Question
 from django.shortcuts import render, get_object_or_404
 
-def view_question_view(request, pk):
-    course = get_object_or_404(Course, id=pk)
-    questions = Question.objects.filter(course=course)
 
-    return render(request, 'quiz/view_question.html', {
-        'questions': questions,
-        'course': course,
-    })
 
 @login_required(login_url='adminlogin')
 def admin_view_question_view(request):
@@ -45,8 +38,7 @@ def admin_view_question_view(request):
 def delete_all_questions(request, cid):
     course = get_object_or_404(Course, id=cid)
     Question.objects.filter(course=course).delete()
-    return redirect('admin-view-question')
-
+    return redirect('view-question', pk=cid)
 
 def admin_login_view(request):
     if request.method == "POST":
@@ -319,10 +311,7 @@ def view_question_view(request, pk):
         'course': course,
     })
 
-@login_required(login_url='adminlogin')
-def view_question_view(request,pk):
-    questions=models.Question.objects.all().filter(course_id=pk)
-    return render(request,'quiz/view_question.html',{'questions':questions})
+
 
 @login_required(login_url='adminlogin')
 def delete_question_view(request,pk):

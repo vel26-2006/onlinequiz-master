@@ -3,7 +3,60 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
+
+@media (max-width:768px){
+
+    .glass-card{
+        width:90%;
+        padding:20px;
+        margin:80px auto 20px;
+        border-radius: 50px;
+    }
+
+    .form-group{
+        margin-bottom:18px;
+    }
+
+    .form-control{
+        width:100%;
+        height:45px;
+        font-size:15px;
+    }
+
+    label{
+        font-size:14px;
+    }
+
+    .card h3{
+        font-size:26px;
+    }
+}
+
+.glass-card{
+    width:95%;
+    max-width:500px;
+    margin:90px auto 30px;
+    padding:25px;
+}
+
+form{
+    margin:0;
+}
+
+.form-control{
+    width:100%;
+    height:48px;
+    border-radius:10px;
+}
+
+.card h3{
+    font-size:32px;
+    margin-bottom:25px;
+}
 
         form{
            margin: 50px; 
@@ -13,6 +66,7 @@ body{
   background:linear-gradient(135deg,#0f172a,#2563eb,#06b6d4);
     min-height:100vh;
     font-family:'Poppins',sans-serif;
+  
 
 }
 .glass-card{
@@ -29,6 +83,7 @@ body{
 
 .card-body{
     padding:40px;
+    
 }
 
 .form-control{
@@ -133,8 +188,8 @@ class="card glass-card">
     {% csrf_token %}
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label for="username">Username</label>
-        {% render_field userForm.username|attr:'required:true'  class="form-control" placeholder="username" %}
+        <label for="username">REGISTER NO</label>
+        {% render_field userForm.username|attr:'required:true'  class="form-control" placeholder="Register No" %}
       </div>
       <div class="form-group col-md-6">
         <label for="inputPassword4">Password</label>
