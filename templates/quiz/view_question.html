@@ -176,7 +176,7 @@
       </a>
       <thead>
         <tr>
-        
+          <th>No</th>
           <th>Question</th>
          
           <th>Marks</th>
@@ -189,17 +189,18 @@
       </thead>
 
       
-      {% for c in questions %}
-      <tr>
-
-        <td> {{c.question}}</td>
-        
-        <td>{{c.marks}}</td>
-       <td>
-   
-</td>
-      </tr>
-      {% endfor %}
+     <tbody>
+{% for q in questions %}
+<tr>
+    <td>{{ forloop.counter }}</td>
+    <td>{{ q.question }}</td>
+    <td>{{ q.marks }}</td>
+    <td>
+        <a href="{% url 'delete-question' q.id %}">Delete</a>
+    </td>
+</tr>
+{% endfor %}
+</tbody>
     </table>
   </div>
 </div>

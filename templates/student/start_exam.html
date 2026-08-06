@@ -7,54 +7,169 @@
   <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
   <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
+<style>
+   body{
+         background: linear-gradient(135deg,#3b82f6,#1d4ed8) ;
 
+        
+    }
+    
+    .form-check{
+    background: rgba(255,255,255,0.12);
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 12px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.form-check:hover{
+    transform: translateX(5px);
+    background: rgba(255,255,255,0.20);
+}
+
+.form-check-input{
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+/* Selected Option Animation */
+.form-check.selected{
+    background: linear-gradient(135deg,#22adc5,#165fa3);
+    color: white;
+    transform: scale(1.03);
+    box-shadow: 0 0 15px rgba(34,197,94,.5);
+    animation: selectPop .3s ease;
+}
+
+@keyframes selectPop{
+    0%{
+        transform: scale(.95);
+    }
+    60%{
+        transform: scale(1.05);
+    }
+    100%{
+        transform: scale(1.03);
+    }
+}
+
+.timer-box{
+    position: fixed;
+    top: 70px;
+    right: 10px;
+    z-index: 9999;
+
+    background: #ef4444;
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Mobile */
+@media (max-width:768px){
+
+    .timer-box{
+        top: 65px;
+        right: 8px;
+        font-size: 15px;
+        padding: 8px 12px;
+        border-radius: 10px;
+    }
+
+    .jumbotron{
+        padding-top: 70px;   /* Timer heightக்கு space */
+    }
+}
+
+.timer-box{
+   
+    background: linear-gradient(135deg,#ef4444,#dc2626);
+    color: #fff;
+
+     position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+
+    box-shadow: 0 8px 20px rgba(0,0,0,.25);
+}
+      
+.card {
+    background: transparent;
+    box-shadow: none;
+}
+.question{
+    background: #cfc0c0;
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    border: 1px solid #ddd;
+}
+  
+  .jumbotron{
+    background: rgba(255,255,255,0.08) ;
+    backdrop-filter: blur(12px);
+    
+   
+    border-radius: 20px;
+}
+</style>
 </head>
 
 
 <div class="jumbotron my-4">
 
-  <form class="form" autocomplete="off" onsubmit="return saveAns()"  action="/student/calculate-marks" method="POST">
+  <div class="timer-box">
+    ⏰ Time Left: <span id="timer">30</span>s
+</div>
+
+
+
+
+
+  <form  id="quizForm" method="POST"class="form" autocomplete="off" onsubmit="return saveAns()"  action="/student/calculate-marks" method="POST">
     {% csrf_token %}
     <h1 style="text-align: center;">{{course.course_name}}</h1>
-    {% for q in questions%}
-    <h3 class="text-info">{{ forloop.counter }}. {{q.question}}</h3><h4 style="text-align: right;">[Marks {{q.marks}}]</h4>
     
-        <input type="hidden" name="csrfmiddlewaretoken" value="C24rUotmdHawVQJL3KrqiWxvti8UffOFYUc8TRbZtLt36AVLdP3jbkzUVe3beRAa">
-        
-        
-          <div class="form-check mx-4">
-            <input class="form-check-input" type="radio" name="{{ forloop.counter }}" id="{{q.option1}}" value="Option1">
-            <label class="form-check-label" for="option1">
-              {{q.option1}}
-            </label>
-          </div>
+        {% for q in questions %}
+<div class="question" style="display:none;">
 
-        
-          <div class="form-check mx-4">
-            <input class="form-check-input" type="radio" name="{{ forloop.counter }}" id="{{q.option2}}" value="Option2">
-            <label class="form-check-label" for="option2">
-              {{q.option2}}
-            </label>
-          </div>
+    <h3 class="text-info">{{ forloop.counter }}. {{ q.question }}</h3>
+    <h4 style="text-align:right;">[Marks {{ q.marks }}]</h4>
 
-        
-          <div class="form-check mx-4">
-            <input class="form-check-input" type="radio" name="{{ forloop.counter }}" id="{{q.option3}}" value="Option3">
-            <label class="form-check-label" for="option3">
-              {{q.option3}}
-            </label>
-          </div>
+    <div class="form-check mx-4">
+        <input class="form-check-input" type="radio"
+               name="{{ forloop.counter }}" value="Option1">
+        <label>{{ q.option1 }}</label>
+    </div>
 
-        
-          <div class="form-check mx-4">
-            <input class="form-check-input" type="radio" name="{{ forloop.counter }}" id="{{q.option4}}" value="Option4">
-            <label class="form-check-label" for="option4">
-              {{q.option4}}
-            </label>
-          </div>
+    <div class="form-check mx-4">
+        <input class="form-check-input" type="radio"
+               name="{{ forloop.counter }}" value="Option2">
+        <label>{{ q.option2 }}</label>
+    </div>
 
-        {% endfor %}
-        <input class="btn btn-info btn-lg"   type="submit" value="Submit">  
+    <div class="form-check mx-4">
+        <input class="form-check-input" type="radio"
+               name="{{ forloop.counter }}" value="Option3">
+        <label>{{ q.option3 }}</label>
+    </div>
+
+    <div class="form-check mx-4">
+        <input class="form-check-input" type="radio"
+               name="{{ forloop.counter }}" value="Option4">
+        <label>{{ q.option4 }}</label>
+    </div>
+
+</div>
+{% endfor %}
+       <button type="button" id="nextBtn" class="btn btn-primary" style="background-color: #1d4ed8;">
+    Next →
+</button>
     </form>
   </div>
 
@@ -79,6 +194,76 @@
   document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
+
+let currentQuestion = 0;
+let questions = document.querySelectorAll(".question");
+
+questions.forEach(q => q.style.display = "none");
+questions[0].style.display = "block";
+
+let timeLeft = 30;
+
+function startTimer(){
+
+    const timer = setInterval(function(){
+
+        document.getElementById("timer").innerHTML = timeLeft;
+
+        if(timeLeft <= 0){
+
+            clearInterval(timer);
+            nextQuestion();
+        }
+
+        timeLeft--;
+
+    },1000);
+
+}
+
+function nextQuestion(){
+
+    questions[currentQuestion].style.display="none";
+
+    currentQuestion++;
+
+    if(currentQuestion >= questions.length){
+
+    saveAns();
+    document.getElementById("quizForm").submit();
+    return;
+}
+
+    questions[currentQuestion].style.display="block";
+
+    timeLeft = 30;
+
+    startTimer();
+}
+
+document.getElementById("nextBtn").onclick = nextQuestion;
+
+startTimer();
+
+
+document.querySelectorAll(".form-check-input").forEach(function(radio){
+
+    radio.addEventListener("change", function(){
+
+        // Remove selected class from current question options
+        this.closest(".question")
+            .querySelectorAll(".form-check")
+            .forEach(function(option){
+                option.classList.remove("selected");
+            });
+
+        // Add animation to selected option
+        this.parentElement.classList.add("selected");
+
+    });
+
+});
+   
 </script> 
 
 <br><br><br><br><br><br>

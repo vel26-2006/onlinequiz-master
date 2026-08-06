@@ -24,6 +24,7 @@ from django.contrib import messages
 from django.shortcuts import redirect, get_object_or_404
 from .models import Course, Question
 from django.shortcuts import render, get_object_or_404
+from django.db.models import Sum
 
 
 
@@ -268,6 +269,7 @@ def delete_course_view(request,pk):
 def admin_question_view(request):
     return render(request,'quiz/admin_question.html')
 
+from django.db.models import Sum
 
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
@@ -293,13 +295,18 @@ def admin_add_question_view(request):
 
             extract_questions_from_pdf(pdf_path, course)
 
+            course.question_number = models.Question.objects.filter(course=course).count()
+            course.total_marks = models.Question.objects.filter(course=course).aggregate(
+                Sum('marks')
+            )['marks__sum'] or 0
+
+            course.save()
+
             return HttpResponseRedirect('/admin-view-question')
 
-    return render(
-        request,
-        'quiz/admin_add_question.html',
-        {'questionForm': questionForm}
-    )
+    return render(request, 'quiz/admin_add_question.html', {
+        'questionForm': questionForm
+    })
 
 @login_required(login_url='adminlogin')
 def view_question_view(request, pk):

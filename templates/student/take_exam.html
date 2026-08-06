@@ -7,13 +7,21 @@
   <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
   <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
+<style>
+    body{
+         background: linear-gradient(135deg,#3b82f6,#1d4ed8) ;
+    }
 
+
+    
+    
+</style>
 </head>
-<br><br>
+
 <div class="container my-4">
     <div class="jumbotron">
 
-	      <h3 class="text-info text-center">Before you start the Exam, here are the rules</h3>
+	      <h3 class="text-info text-center">GET START EXAM 🎊</h3>
 
         <div class="row">
 
@@ -34,25 +42,24 @@
                     <h4 class="card-title">Rules :</h4>
                     <p class="card-text">
                         </p><ul style="list-style:decimal;">
-                            <li>All questions are multiple choice question.</li>
+                           
                             <li><span class="text-danger">Only one choice is correct.</span></li>
-                            <li>Every question carry different marks 
+                            
                             </li>
                 
                             <li>Try to answer as quickly as you can.</li>
-                            <li>If you press refresh or go back to the previous page, there will be a new question for you and the question you were on will be counted as attempted.</li>
-                            <li>Questions are displayed randomly for every user.</li>
-                            <li>You will be told your marks immediately when you submit the answer.</li>
+                           
+                            <li> submit the answer.</li>
                         </ul>
                     <p></p>
                     <a href="{% url 'start-exam' course.id  %}" class="btn btn-info">Let's Start</a>
                 </div>  
-                <div class="card-footer">Best Of Luck</div>  
+                <div class="card-footer">Best Of Luck👍</div>  
             </div>  
         </div>  
 
     </div>
 </div>
 
-<br><br><br><br><br><br>
+
 {% endblock content %}

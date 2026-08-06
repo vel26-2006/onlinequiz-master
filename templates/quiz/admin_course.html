@@ -67,31 +67,96 @@
       left: 0px;
       right: 0px;
     }
+
+    .card-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+}
+
+.card-box{
+    width:360px;
+    height:220px;
+    border-radius:25px;
+    padding:35px;
+    color:#fff;
+    text-decoration:none;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    transition:0.4s;
+    box-shadow:0 10px 25px rgba(0,0,0,.35);
+}
+
+.card-box:hover{
+    transform:translateY(-10px);
+    box-shadow:0 20px 40px rgba(0,0,0,.45);
+}
+
+.card-box i{
+    font-size:55px;
+    margin-bottom:15px;
+}
+
+.card-box h2{
+    font-size:34px;
+    margin:0;
+}
+
+.card-box p{
+    margin-top:10px;
+    font-size:18px;
+}
+
+.add-card{
+    background:linear-gradient(135deg,#37d5ff,#00b8ff);
+}
+
+.view-card{
+    background:linear-gradient(135deg,#ff7a18,#ff4b2b);
+}
+/* Refresh Animation */
+
+/* Page Load Animation */
+
+body{
+    animation: pageLoad .8s ease;
+}
+
+@keyframes pageLoad{
+    0%{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    100%{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+
+
+
+
+
     </style>
   </head>
-<br><br>
 
-  <div class="container">
-    <div class="row">
-      <div class="col-md-4 col-xl-6">
-        <div class="card bg-c-blue order-card">
-          <div class="card-block">
-            <h6 class="m-b-20"> <a href="admin-add-course" style="text-decoration: none;color:white;">Add Course</a> </h6>
-            <h2 class="text-right"><i class="fas fa-plus f-left"></i></h2>
-            
-          </div>
-        </div>
-      </div>
+
   
-      <div class="col-md-4 col-xl-6">
-        <div class="card bg-c-green order-card">
-          <div class="card-block">
-            <h6 class="m-b-20"><a href="admin-view-course" style="text-decoration: none;color:white;">View Course</a> </h6>
-            <h2 class="text-right"><i class="fas fa-eye f-left"></i></h2>
-            
-          </div>
-        </div>
-      </div>
+
+   <div class="card-container">
+
+    <a href="{% url 'admin-view-course' %}" class="card-box view-card">
+        <i class="fa fa-eye"></i>
+        <h2>View Course</h2>
+        <p>Manage all courses</p>
+    </a>
+
+</div>
+
+</div>
   
      
   
@@ -100,7 +165,6 @@
   </div>
 
 
-<br><br><br><br><br><br><br><br><br><br>
 
 <script src="http://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
 
