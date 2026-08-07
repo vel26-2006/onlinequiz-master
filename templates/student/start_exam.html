@@ -110,6 +110,41 @@
     border: 1px solid #ddd;
 }
   
+.question{
+    opacity: 1;
+    transform: translateX(0);
+    transition: all .35s ease;
+}
+
+.question.show{
+    animation: slideIn .35s ease;
+}
+
+.question.hide{
+    animation: slideOut .25s ease;
+}
+
+@keyframes slideIn{
+    from{
+        opacity:0;
+        transform:translateX(40px) scale(.96);
+    }
+    to{
+        opacity:1;
+        transform:translateX(0) scale(1);
+    }
+}
+
+@keyframes slideOut{
+    from{
+        opacity:1;
+        transform:translateX(0);
+    }
+    to{
+        opacity:0;
+        transform:translateX(-40px);
+    }
+}
   .jumbotron{
     background: rgba(255,255,255,0.08) ;
     backdrop-filter: blur(12px);
@@ -202,49 +237,58 @@ questions.forEach(q => q.style.display = "none");
 questions[0].style.display = "block";
 
 let timeLeft = 30;
+let timer;
 
 function startTimer(){
 
-    const timer = setInterval(function(){
+    clearInterval(timer);
+
+    document.getElementById("timer").innerHTML = timeLeft;
+
+    timer = setInterval(function(){
 
         document.getElementById("timer").innerHTML = timeLeft;
 
         if(timeLeft <= 0){
-
             clearInterval(timer);
             nextQuestion();
+            return;
         }
 
         timeLeft--;
 
     },1000);
-
 }
 
 function nextQuestion(){
 
-    questions[currentQuestion].style.display="none";
+    questions[currentQuestion].classList.add("hide");
 
-    currentQuestion++;
+    setTimeout(function(){
 
-    if(currentQuestion >= questions.length){
+        questions[currentQuestion].style.display = "none";
+        questions[currentQuestion].classList.remove("hide");
 
-    saveAns();
-    document.getElementById("quizForm").submit();
-    return;
+        currentQuestion++;
+
+        if(currentQuestion >= questions.length){
+            saveAns();
+            document.getElementById("quizForm").submit();
+            return;
+        }
+
+        questions[currentQuestion].style.display = "block";
+        questions[currentQuestion].classList.add("show");
+
+        setTimeout(function(){
+            questions[currentQuestion].classList.remove("show");
+        },350);
+
+        timeLeft = 30;
+        startTimer();
+
+    },250);
 }
-
-    questions[currentQuestion].style.display="block";
-
-    timeLeft = 30;
-
-    startTimer();
-}
-
-document.getElementById("nextBtn").onclick = nextQuestion;
-
-startTimer();
-
 
 document.querySelectorAll(".form-check-input").forEach(function(radio){
 
@@ -263,8 +307,11 @@ document.querySelectorAll(".form-check-input").forEach(function(radio){
     });
 
 });
+
+document.getElementById("nextBtn").onclick = nextQuestion;
+startTimer();
    
 </script> 
 
-<br><br><br><br><br><br>
+
 {% endblock content %}

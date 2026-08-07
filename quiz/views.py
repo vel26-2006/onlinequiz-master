@@ -356,9 +356,7 @@ def admin_check_marks_view(request,pk):
 def aboutus_view(request):
     return render(request,'quiz/aboutus.html')
 
-from django.http import HttpResponse
-from django.core.mail import send_mail
-from django.conf import settings
+
 
 def contactus_view(request):
     sub = forms.ContactusForm()
