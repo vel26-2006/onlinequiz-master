@@ -50,12 +50,7 @@
    
 }
 
-.right_area{
-    display:flex;
-    align-items:center;
-    margin-left:auto;
-     color: aliceblue;
-}
+
 
 .logout_btn{
    background:#19B3D3;
@@ -68,8 +63,9 @@
 
 .content{
     margin-top: 100px;   /* Navbar height */
-    margin-left: 250px;
+    margin-left:0;
     padding: 30px;
+    transition:margin-left.3s ease;
 }
 
 .left_area h3{
@@ -91,7 +87,7 @@
         .sidebar{
             position:fixed;
             top:70px;
-            left:0;
+            left:-250px;
             width:250px;
             height:calc(100vh - 70px);
             background:#2f323a;
@@ -99,6 +95,10 @@
             transition:.3s;
             overflow-y:auto;
         }
+
+        #check:checked ~ .sidebar{
+    left: 0;
+}
 
         .sidebar center{
             margin-bottom:20px;
@@ -130,6 +130,33 @@
             color: white;
         }
 
+
+@media (max-width:768px){
+
+    .content{
+        margin-top:80px;
+        margin-left:0;
+        padding:15px;
+    }
+
+    .sidebar{
+        width:250px;
+        left:-250px;
+        z-index:999;
+    }
+
+    #check:checked ~ .sidebar{
+        left:0;
+    }
+
+    .container{
+        width:100%;
+        margin:0;
+        padding:10px;
+    }
+}
+
+
         
         @media (max-width:768px){
 
@@ -157,17 +184,14 @@
     }
 
     #sidebar_btn{
+        display: block;
      color: #fff;
     font-size: 26px;
     cursor: pointer;
     margin-right: 15px;
 }
 
-.right_area{
-    margin-left:auto;
-    display:flex;
-    align-items:center;
-}
+
 
 .container{
    
@@ -180,33 +204,81 @@
     border-radius:15px;
     box-shadow:0 10px 30px rgba(0,0,0,.3);
 }
-@media (max-width:768px){
 
-    .right_area{
-        margin-left:auto;
-    }
+   
 
-    .logout_btn{
-        padding:6px 10px;
-        font-size:12px;
-    }
-}
+   
 
 @media (min-width:769px){
 
     .sidebar{
+        left:-250px;
+    }
+
+    #check:checked ~ .sidebar{
         left:0;
     }
 
     .content{
+        margin-left:0;
+        transition:.3s;
+    }
+
+    #check:checked ~ .content{
         margin-left:250px;
     }
 
     #sidebar_btn{
-        display:none;
+        display:block;
     }
 }
 
+.profile_image{
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 3px solid #22d3ee;
+    box-shadow: 0 0 15px rgba(34,211,238,.5);
+}
+
+.sidebar{
+    position: fixed;
+    top: 70px;
+    left: -250px;
+    width: 250px;
+    height: calc(100vh - 70px);
+
+    background: rgba(0, 0, 0, 0.55); /* Black glass */
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    border-right: 1px solid rgba(255,255,255,0.15);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+
+    padding-top: 20px;
+    transition: .3s;
+    overflow-y: auto;
+}
+
+.sidebar a{
+    color: #fff;
+    padding: 15px 25px;
+    display: block;
+    text-decoration: none;
+    transition: .3s;
+}
+
+.sidebar a:hover{
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(10px);
+    border-left: 4px solid #22d3ee;
+    color: #22d3ee;
+}
+
+.logout_btn{
+    background: linear-gradient(135deg,#ef4444,#dc2626);
+    border-radius:10px;
+}
     </style>
 
 </head>
@@ -222,12 +294,10 @@
             <i class="fas fa-bars" id="sidebar_btn"></i>
         </label>
 
-        <h3>online quiz</h3>
+        <h3>Online Quiz-TVK</h3>
     </div>
 
-    <div class="right_area">
-    <a href="/logout" class="logout_btn">Logout</a>
-</div>
+    
    
 
 </header>
@@ -251,6 +321,9 @@
 
     <a href="/student/student-marks">
         <i class="fas fa-chart-line"></i> Marks
+    </a>
+     <a href="{% url 'logout' %}" class="btn btn-danger btn-block">
+        Logout
     </a>
 
 </div>
