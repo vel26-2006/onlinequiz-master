@@ -266,6 +266,99 @@ body{
     }
 }
 
+/* Latest Student Results Table */
+.results-card{
+    background:rgba(18,30,60,.45);
+    border-radius:18px;
+    padding:20px;
+    box-shadow:0 10px 25px rgba(0,0,0,.4);
+    overflow:hidden;
+}
+
+.results-card table{
+    width:100%;
+    border-collapse:collapse !important;
+    color:#fff;
+}
+
+.results-card thead tr{
+    background:linear-gradient(90deg,#45dfff,#0b6cff);
+}
+
+.results-card thead th{
+    color:#fff !important;
+    font-size:18px;
+    font-weight:600;
+    padding:15px;
+    border:1px solid rgba(255,255,255,.2) !important;
+}
+
+.results-card tbody tr{
+    background:rgba(20,35,75,.6);
+    transition:.3s;
+}
+
+.results-card tbody tr:hover{
+    background:rgba(0,120,255,.2);
+}
+
+.results-card tbody td{
+    color:#fff !important;
+    padding:14px;
+    border:1px solid rgba(255,255,255,.12) !important;
+    vertical-align:middle;
+}
+
+.results-card tbody tr:nth-child(even){
+    background:rgba(30,45,90,.55) !important;
+}
+
+.results-card .table{
+    margin-bottom:0;
+}
+
+.results-card .table-striped tbody tr:nth-of-type(odd){
+    background:rgba(20,35,75,.6) !important;
+}
+
+.results-card .table-bordered{
+    border:none !important;
+}
+
+.results-card .table-bordered td,
+.results-card .table-bordered th{
+    border:1px solid rgba(255,255,255,.15) !important;
+}
+
+.results-card table{
+    width:100%;
+    border-collapse:separate;
+    border-spacing:0;
+    overflow:hidden;
+    border-radius:18px;
+}
+
+/* Top Left */
+.results-card thead th:first-child{
+    border-top-left-radius:18px;
+}
+
+/* Top Right */
+.results-card thead th:last-child{
+    border-top-right-radius:18px;
+}
+
+/* Bottom Left */
+.results-card tbody tr:last-child td:first-child{
+    border-bottom-left-radius:18px;
+}
+
+/* Bottom Right */
+.results-card tbody tr:last-child td:last-child{
+    border-bottom-right-radius:18px;
+}
+
+
     </style>
   </head>
 <br><br>
@@ -313,7 +406,7 @@ body{
     <div class="results-card">
     <h3><i class="fas fa-trophy"></i> Latest Student Results</h3>
      <div class="table-responsive">
-    <table class="table table-bordered table-striped mb-0">
+    <table class="result-table ">
         <thead>
             <tr>
                 <th>Student</th>
