@@ -25,6 +25,8 @@ from django.shortcuts import redirect, get_object_or_404
 from .models import Course, Question
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Sum
+from django.core.mail import send_mail
+
 
 
 
@@ -354,6 +356,10 @@ def admin_check_marks_view(request,pk):
 def aboutus_view(request):
     return render(request,'quiz/aboutus.html')
 
+from django.http import HttpResponse
+from django.core.mail import send_mail
+from django.conf import settings
+
 def contactus_view(request):
     sub = forms.ContactusForm()
 
@@ -373,10 +379,9 @@ def contactus_view(request):
                     settings.EMAIL_RECEIVING_USER,
                     fail_silently=False,
                 )
-                return render(request, 'quiz/contactussuccess.html')
+                return HttpResponse("Email Sent Successfully")
 
             except Exception as e:
-                return HttpResponse(str(e))
+                return HttpResponse(f"Email Error: {e}")
 
     return render(request, 'quiz/contactus.html', {'form': sub})
-
