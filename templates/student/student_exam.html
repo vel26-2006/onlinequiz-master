@@ -167,7 +167,93 @@ body{
         transform:translateY(0);
     }
 }
+
+/* =========================
+   MOBILE VIEW ONLY
+   ========================= */
+@media (max-width: 768px) {
+
+    body {
+        padding: 10px !important;
+    }
+
+    .exam-page {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .exam-title {
+        font-size: 24px !important;
+        margin-bottom: 18px !important;
+    }
+
+    .exam-table {
+        width: 100% !important;
+        max-width: 100% !important;
+        table-layout: fixed;
+        border-radius: 20px !important;
+    }
+
+    .exam-table th,
+    .exam-table td {
+        padding: 12px 5px !important;
+        font-size: 13px !important;
+    }
+
+    /* Exam Name */
+    .exam-table th:first-child,
+    .exam-table td:first-child {
+        width: 55% !important;
+        word-break: break-word;
+    }
+
+    /* Take Exam */
+    .exam-table th:last-child,
+    .exam-table td:last-child {
+        width: 45% !important;
+    }
+
+    .attempted-label {
+        font-size: 9px !important;
+        padding: 5px 4px !important;
+        white-space: nowrap;
+    }
+
+    .exam-btn {
+        width: 36px !important;
+        height: 32px !important;
+    }
+}
+
+
+/* Small mobile */
+@media (max-width: 400px) {
+
+    body {
+        padding: 7px !important;
+    }
+
+    .exam-title {
+        font-size: 22px !important;
+    }
+
+    .exam-table th,
+    .exam-table td {
+        padding: 10px 4px !important;
+        font-size: 12px !important;
+    }
+
+    .attempted-label {
+        font-size: 8px !important;
+        padding: 5px 3px !important;
+    }
+}
   </style>
+
+
+
 </head>
 
 <div class="container">
@@ -175,6 +261,8 @@ body{
     <div class="panel-heading">
       <h6 class="panel-title">Courses</h6>
     </div>
+
+    
     <table class="table table-hover" id="dev-table">
       <thead>
         <tr>

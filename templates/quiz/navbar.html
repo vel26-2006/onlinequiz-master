@@ -114,6 +114,50 @@ body{
     margin-top:40px;
     margin-bottom:40px;
 }
+
+
+.tvk-brand {
+    display: flex !important;
+    align-items: center;
+    gap: 10px;
+    color: #ffffff !important;
+    text-decoration: none !important;
+}
+
+.tvk-logo {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    border: 2px solid #ffffff;
+}
+
+.tvk-brand span {
+    font-family: "Comic Sans MS", sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.tvk-brand:hover {
+    color: #ffffff !important;
+    text-decoration: none !important;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+
+    .tvk-logo {
+        width: 40px;
+        height: 40px;
+    }
+
+    .tvk-brand span {
+        font-size: 19px;
+    }
+}
+
   </style>
 </head>
 
@@ -123,7 +167,15 @@ body{
 
   <div class="bs-example">
     <nav class="navbar navbar-expand-md  navbar-dark fixed-top" style="background-color: #000000;">
-    <a style="color: #ffffff;text-decoration: none; " href="/"><font face = "Comic sans MS" size =" 5">Online Quiz-TVK</font><br /></a>  
+   <a href="/" class="navbar-brand tvk-brand">
+
+    <img src="{% static 'image/tvk-logo.jpeg' %}"
+         alt="TVK Logo"
+         class="tvk-logo">
+
+    <span>Online Quiz-TVK</span>
+
+</a>
       <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
         <span class="navbar-toggler-icon"></span>
       </button>

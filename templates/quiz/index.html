@@ -5,6 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+
+     <title>Online Quiz - TVK</title>
+
+    <link rel="icon"
+          type="image/jpeg"
+          href="{% static 'image/tvk-logo.jpeg' %}">
 <style>
  
   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
@@ -165,7 +171,96 @@ html,body{
 
 
 
+/* =========================
+   SOCIAL FOOTER
+   ========================= */
 
+.social-footer {
+    width: 100%;
+    text-align: center;
+    padding: 25px 10px;
+    margin-top: 40px;
+    color: white;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 12px;
+}
+
+.social {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+    text-decoration: none;
+
+    font-size: 22px;
+
+    background: rgba(255,255,255,.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    border: 1px solid rgba(255,255,255,.2);
+
+    transition: .3s ease;
+}
+
+.social:hover {
+    transform: translateY(-5px) scale(1.08);
+    color: white;
+    text-decoration: none;
+}
+
+.whatsapp:hover {
+    background: #25D366;
+}
+
+.instagram:hover {
+    background: #E1306C;
+}
+
+.linkedin:hover {
+    background: #0077B5;
+}
+
+.social-footer p {
+    margin: 0;
+    font-size: 13px;
+    opacity: .8;
+}
+
+
+/* Mobile */
+@media (max-width: 768px) {
+
+    .social-footer {
+        padding: 20px 5px;
+        margin-top: 30px;
+    }
+
+    .social-icons {
+        gap: 14px;
+    }
+
+    .social {
+        width: 40px;
+        height: 40px;
+        font-size: 19px;
+    }
+
+    .social-footer p {
+        font-size: 12px;
+    }
+}
 
 </style>
 
@@ -226,7 +321,40 @@ html,body{
 </section>
   {% include "quiz/footer.html" %}
 
+<!-- Footer -->
+<footer class="social-footer">
 
+    <div class="social-icons">
+
+        <!-- WhatsApp -->
+        <a href="https://wa.me/8610346251"
+           target="_blank"
+           class="social whatsapp"
+           title="WhatsApp">
+            <i class="fa fa-whatsapp"></i>
+        </a>
+
+        <!-- Instagram -->
+        <a href="https://instagram.com/thanigai_pure_soul"
+           target="_blank"
+           class="social instagram"
+           title="Instagram">
+            <i class="fa fa-instagram"></i>
+        </a>
+
+        <!-- LinkedIn -->
+        <a href="https://linkedin.com/in/Thanihaivel "
+           target="_blank"
+           class="social linkedin"
+           title="LinkedIn">
+            <i class="fa fa-linkedin"></i>
+        </a>
+
+    </div>
+
+    <p>© 2026 Online Quiz - TVK</p>
+
+</footer>
 </body>
 
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
