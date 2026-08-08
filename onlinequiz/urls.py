@@ -5,11 +5,18 @@ from django.contrib.auth.views import LogoutView, LoginView
 from django.conf import settings
 from django.conf.urls.static import static
 
+from django.contrib.sitemaps.views import sitemap
+from .sitemaps import StaticViewSitemap
+
+sitemaps = {
+    'static': StaticViewSitemap,
+}
+
 urlpatterns = [   
     path('admin/', admin.site.urls),
     path('student/', include('student.urls')),
 
-    path('', views.home_view, name=''),
+    path('', views.home_view, name='home'),
     path('logout', LogoutView.as_view(template_name='quiz/logout.html'), name='logout'),
     path('aboutus', views.aboutus_view),
     path('contactus', views.contactus_view),

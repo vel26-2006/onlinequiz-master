@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'quiz',
     'student',
     'widget_tweaks',
+    
 
 ]
 
