@@ -23,7 +23,17 @@ urlpatterns = [
 ),
     path('admin/', admin.site.urls),
     path('student/', include('student.urls')),
+    path(
+    'student-heartbeat/',
+    views.student_heartbeat,
+    name='student-heartbeat'
+),
 
+    path(
+    'active-students-count/',
+    views.active_students_count,
+    name='active-students-count'
+),
     path('', views.home_view, name='home'),
     path('logout', LogoutView.as_view(template_name='quiz/logout.html'), name='logout'),
     path('aboutus', views.aboutus_view),

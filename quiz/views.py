@@ -27,10 +27,40 @@ from django.shortcuts import render, get_object_or_404
 from django.db.models import Sum
 from django.core.mail import send_mail
 
+from django.utils import timezone
+from datetime import timedelta
+from django.http import JsonResponse
 
+def is_student(user):
+    return user.groups.filter(name='STUDENT').exists()
+
+
+def is_admin(user):
+    return user.is_superuser
+
+
+@login_required
+def student_heartbeat(request):
+    if is_student(request.user):
+
+        student = SMODEL.Student.objects.get(
+            user_id=request.user.id
+        )
+
+        activity, created = QMODEL.StudentActivity.objects.get_or_create(
+            student=student
+        )
+
+        activity.last_seen = timezone.now()
+        activity.save(update_fields=['last_seen'])
+
+        return JsonResponse({'status': 'active'})
+
+    return JsonResponse({'status': 'not_student'})
 
 
 @login_required(login_url='adminlogin')
+@user_passes_test(is_admin, login_url='adminlogin')
 def admin_view_question_view(request):
     courses = Course.objects.all()
     return render(request, 'quiz/admin_view_question.html', {
@@ -66,12 +96,23 @@ def home_view(request):
 
 
 
-def is_student(user):
-    return user.groups.filter(name='STUDENT').exists()
 
 
-def is_admin(user):
-    return user.is_superuser
+@login_required(login_url='adminlogin')
+def active_students_count(request):
+
+    if not request.user.is_superuser:
+        return JsonResponse({'active_students': 0}, status=403)
+
+    active_time = timezone.now() - timedelta(minutes=5)
+
+    count = QMODEL.StudentActivity.objects.filter(
+        last_seen__gte=active_time
+    ).count()
+
+    return JsonResponse({
+        'active_students': count
+    })
 
 @login_required
 def afterlogin_view(request):
@@ -98,15 +139,33 @@ def adminclick_view(request):
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
 def admin_dashboard_view(request):
+
+    active_time = timezone.now() - timedelta(minutes=5)
+
+    active_students = QMODEL.StudentActivity.objects.filter(
+        last_seen__gte=active_time
+    ).count()
+
     dict = {
         'total_student': SMODEL.Student.objects.all().count(),
-        
-        'total_course': Course.objects.all().count(),
-        'total_question': Question.objects.all().count(),
-       'results': Result.objects.select_related('student', 'exam').order_by('-marks', '-id')[:10],
-    }
-    return render(request, 'quiz/admin_dashboard.html', context=dict)
 
+        'active_students': active_students,
+
+        'total_course': Course.objects.all().count(),
+
+        'total_question': Question.objects.all().count(),
+
+        'results': Result.objects.select_related(
+            'student',
+            'exam'
+        ).order_by('-marks', '-id')[:10],
+    }
+
+    return render(
+        request,
+        'quiz/admin_dashboard.html',
+        context=dict
+    )
 @login_required(login_url='adminlogin')
 
 def admin_teacher_view(request):
@@ -259,11 +318,21 @@ def admin_view_course_view(request):
     return render(request,'quiz/admin_view_course.html',{'courses':courses})
 
 @login_required(login_url='adminlogin')
-def delete_course_view(request,pk):
-    course=models.Course.objects.get(id=pk)
-    course.delete()
-    return HttpResponseRedirect('/admin-view-course')
+@user_passes_test(is_admin)
+def delete_course_view(request, pk):
 
+    course = get_object_or_404(Course, id=pk)
+
+    # Delete all results related to this course
+    Result.objects.filter(exam=course).delete()
+
+    # Delete all questions related to this course
+    Question.objects.filter(course=course).delete()
+
+    # Delete the course
+    course.delete()
+
+    return redirect('admin-view-course')
 
 
 @login_required(login_url='adminlogin')

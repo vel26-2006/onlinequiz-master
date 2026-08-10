@@ -358,6 +358,14 @@ body{
     border-bottom-right-radius:18px;
 }
 
+.active-card{
+    background:linear-gradient(135deg,#16a34a,#22c55e);
+}
+
+.active-card small{
+    font-size:14px;
+    opacity:.9;
+}
 
     </style>
   </head>
@@ -402,6 +410,18 @@ body{
         </div>
     </a>
 </div>
+
+
+<div class="col-md-4">
+    <div class="dashboard-card active-card">
+        <i class="fas fa-user-check"></i>
+        <h5>Students Online</h5>
+        <h2 id="activeStudentsCount">{{ active_students }}</h2>
+        <small>Currently Active</small>
+    </div>
+</div>
+
+
 <div class="container mt-4">
     <div class="results-card">
     <h3><i class="fas fa-trophy"></i> Latest Student Results</h3>
@@ -439,5 +459,23 @@ body{
 </div>
     </div>
 </div>
+<script>
+function updateActiveStudents() {
+    fetch("{% url 'active-students-count' %}", {
+        method: "GET",
+        credentials: "same-origin"
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById("activeStudentsCount").textContent =
+            data.active_students;
+    })
+    .catch(error => {
+        console.log("Active student update error:", error);
+    });
+}
 
+updateActiveStudents();
+setInterval(updateActiveStudents, 10000);
+</script>
 {% endblock %}

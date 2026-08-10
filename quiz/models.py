@@ -41,5 +41,14 @@ class Result(models.Model):
     marks = models.PositiveIntegerField()
     date = models.DateTimeField(auto_now=True)
 
+class StudentActivity(models.Model):
+    student = models.OneToOneField(
+        Student,
+        on_delete=models.CASCADE,
+        related_name='activity'
+    )
+    last_seen = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.student.user.username
    

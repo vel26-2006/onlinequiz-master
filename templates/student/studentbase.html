@@ -336,6 +336,17 @@
     {% include "quiz/footer.html" %}
 
 </div>
+<script>
+function sendHeartbeat() {
+    fetch("{% url 'student-heartbeat' %}", {
+        method: "GET",
+        credentials: "same-origin"
+    });
+}
 
+sendHeartbeat();
+
+setInterval(sendHeartbeat, 60000);
+</script>
 </body>
 </html>
