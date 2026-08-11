@@ -29,6 +29,7 @@ urlpatterns = [
     name='student-heartbeat'
 ),
 
+
     path(
     'active-students-count/',
     views.active_students_count,
@@ -44,7 +45,11 @@ urlpatterns = [
     views.delete_all_questions,
     name='delete-all-questions'
 ),
-
+    path(
+    'delete-course/<int:cid>/',
+    views.delete_course,
+    name='delete-course'
+),
     path('adminclick', views.adminclick_view),
    path('adminlogin', views.admin_login_view, name='adminlogin'),
     path('admin-dashboard', views.admin_dashboard_view, name='admin-dashboard'),

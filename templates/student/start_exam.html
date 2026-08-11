@@ -1,20 +1,24 @@
 {% extends 'student/studentbase.html' %}
 {% block content %}
-{%load static%}
+{% load static %}
 
 <head>
-  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"
+        rel="stylesheet">
+
   <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
   <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
 <style>
-   body{
-         background: linear-gradient(135deg,#3b82f6,#1d4ed8) ;
 
-        
-    }
-    
-    .form-check{
+body{
+    background: linear-gradient(135deg,#3b82f6,#1d4ed8);
+}
+
+/* OPTIONS */
+
+.form-check{
     background: rgba(255,255,255,0.12);
     border-radius: 12px;
     padding: 12px;
@@ -33,7 +37,8 @@
     cursor: pointer;
 }
 
-/* Selected Option Animation */
+/* SELECTED OPTION */
+
 .form-check.selected{
     background: linear-gradient(135deg,#22adc5,#165fa3);
     color: white;
@@ -43,78 +48,83 @@
 }
 
 @keyframes selectPop{
+
     0%{
         transform: scale(.95);
     }
+
     60%{
         transform: scale(1.05);
     }
+
     100%{
         transform: scale(1.03);
     }
+
 }
 
+
+/* TIMER */
+
 .timer-box{
+
     position: fixed;
-    top: 70px;
-    right: 10px;
-    z-index: 9999;
 
-    background: #ef4444;
-    color: #fff;
-    padding: 8px 14px;
-    border-radius: 12px;
-    font-size: 16px;
-    font-weight: bold;
-}
-
-/* Mobile */
-@media (max-width:768px){
-
-    .timer-box{
-        top: 65px;
-        right: 8px;
-        font-size: 15px;
-        padding: 8px 12px;
-        border-radius: 10px;
-    }
-
-    .jumbotron{
-        padding-top: 70px;   /* Timer heightக்கு space */
-    }
-}
-
-.timer-box{
-   
-    background: linear-gradient(135deg,#ef4444,#dc2626);
-    color: #fff;
-
-     position: fixed;
     top: 20px;
     right: 20px;
+
     z-index: 9999;
+
+    background: linear-gradient(135deg,#ef4444,#dc2626);
+
+    color: #fff;
+
+    padding: 8px 14px;
+
+    border-radius: 12px;
+
+    font-size: 16px;
+
+    font-weight: bold;
 
     box-shadow: 0 8px 20px rgba(0,0,0,.25);
 }
-      
-.card {
+
+
+/* CARD */
+
+.card{
     background: transparent;
     box-shadow: none;
 }
+
+
+/* QUESTION */
+
 .question{
+
     background: #cfc0c0;
+
     border-radius: 20px;
+
     padding: 25px;
+
     margin-bottom: 20px;
+
     box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+
     border: 1px solid #ddd;
-}
-  
-.question{
+
     opacity: 1;
+
     transform: translateX(0);
+
     transition: all .35s ease;
+
 }
+
+
+/* QUESTION ANIMATION */
 
 .question.show{
     animation: slideIn .35s ease;
@@ -125,193 +135,1415 @@
 }
 
 @keyframes slideIn{
+
     from{
         opacity:0;
         transform:translateX(40px) scale(.96);
     }
+
     to{
         opacity:1;
         transform:translateX(0) scale(1);
     }
+
 }
 
 @keyframes slideOut{
+
     from{
         opacity:1;
         transform:translateX(0);
     }
+
     to{
         opacity:0;
         transform:translateX(-40px);
     }
+
 }
-  .jumbotron{
-    background: rgba(255,255,255,0.08) ;
+
+
+/* JUMBOTRON */
+
+.jumbotron{
+
+    background: rgba(255,255,255,0.08);
+
     backdrop-filter: blur(12px);
-    
-   
+
     border-radius: 20px;
 }
+
+
+/* BUTTON AREA */
+
+.quiz-buttons{
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-top: 15px;
+
+}
+
+
+/* PREVIOUS BUTTON */
+
+#prevBtn{
+
+    background: #374151;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 8px;
+
+    padding: 10px 18px;
+
+    font-weight: bold;
+
+    transition: all .3s ease;
+
+}
+
+#prevBtn:hover{
+
+    background: #111827;
+
+    transform: translateX(-3px);
+
+}
+
+
+/* NEXT BUTTON */
+
+#nextBtn{
+
+    background: #1d4ed8;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 8px;
+
+    padding: 10px 18px;
+
+    font-weight: bold;
+
+    transition: all .3s ease;
+
+}
+
+#nextBtn:hover{
+
+    background: #1e40af;
+
+    transform: translateX(3px);
+
+}
+
+
+/* SUBMIT BUTTON */
+
+#submitBtn{
+
+    background: #16a34a;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 8px;
+
+    padding: 10px 18px;
+
+    font-weight: bold;
+
+    transition: all .3s ease;
+
+}
+
+#submitBtn:hover{
+
+    background: #15803d;
+
+    transform: scale(1.05);
+
+}
+
+
+/* MOBILE */
+
+@media (max-width:768px){
+
+    .timer-box{
+       
+        top: 30px;
+        
+
+        right: 8px;
+
+        font-size: 15px;
+
+        padding: 8px 12px;
+
+        border-radius: 10px;
+
+    }
+
+    
+    .jumbotron{
+
+        padding-top: 70px;
+
+    }
+
+    .question{
+
+        padding: 18px;
+
+    }
+
+    .quiz-buttons{
+
+        gap: 10px;
+
+    }
+
+    #prevBtn,
+    #nextBtn,
+    #submitBtn{
+
+        padding: 9px 14px;
+
+        font-size: 14px;
+
+    }
+
+}
+
+.timer-box{
+    position: fixed !important;
+    top: 20px;
+    right: 20px;
+
+    z-index: 999999 !important;
+
+    background: linear-gradient(135deg,#ef4444,#dc2626);
+    color: white;
+
+    padding: 8px 14px;
+    border-radius: 12px;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    box-shadow: 0 8px 20px rgba(0,0,0,.25);
+
+    width: auto;
+    height: auto;
+}
+
+@media (max-width:768px){
+
+    .timer-box{
+        position: fixed !important;
+
+        top: 30px;
+        right: 8px;
+        
+
+        z-index: 999999 !important;
+
+        font-size: 15px;
+        padding: 8px 12px;
+        border-radius: 10px;
+    }
+
+}
+
+/* =========================================
+   EXAM SECURITY
+========================================= */
+
+/* Prevent text selection */
+body,
+.question,
+.jumbotron,
+.timer-box {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+
+    -webkit-touch-callout: none;
+}
+
+/* Prevent dragging */
+img,
+.question,
+.jumbotron {
+    -webkit-user-drag: none;
+    user-drag: none;
+}
+
+/* Security warning */
+.security-warning {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    background: rgba(0,0,0,.95);
+    color: white;
+
+    padding: 25px;
+
+    border-radius: 18px;
+
+    text-align: center;
+
+    z-index: 9999999;
+
+    width: 90%;
+    max-width: 420px;
+
+    box-shadow: 0 10px 40px rgba(0,0,0,.5);
+
+    display: none;
+}
+
+.security-warning h3 {
+    color: #f87171;
+    margin-top: 0;
+}
+
+.security-warning button {
+    background: #2563eb;
+    color: white;
+
+    border: none;
+    border-radius: 8px;
+
+    padding: 10px 20px;
+
+    font-weight: bold;
+
+    margin-top: 10px;
+}
+
 </style>
+
 </head>
 
+<div class="timer-box">
+
+        ⏰ :
+        <span id="timer">30</span>s
+
+    </div>
 
 <div class="jumbotron my-4">
 
-  <div class="timer-box">
-    ⏰ Time Left: <span id="timer">30</span>s
-</div>
 
+    <!-- TIMER -->
 
-
-
-
-  <form  id="quizForm" method="POST"class="form" autocomplete="off" onsubmit="return saveAns()"  action="/student/calculate-marks" method="POST">
-    {% csrf_token %}
-    <h1 style="text-align: center;">{{course.course_name}}</h1>
     
+
+    <!-- QUIZ FORM -->
+
+    <form
+        id="quizForm"
+        method="POST"
+        class="form"
+        autocomplete="off"
+        onsubmit="return saveAns()"
+        action="/student/calculate-marks">
+
+        {% csrf_token %}
+
+        <h1 style="text-align: center;">
+            {{ course.course_name }}
+        </h1>
+
+
+        <!-- QUESTIONS -->
+
         {% for q in questions %}
-<div class="question" style="display:none;">
 
-    <h3 class="text-info">{{ forloop.counter }}. {{ q.question }}</h3>
-    <h4 style="text-align:right;">[Marks {{ q.marks }}]</h4>
+        <div class="question" style="display:none;">
 
-    <div class="form-check mx-4">
-        <input class="form-check-input" type="radio"
-               name="{{ forloop.counter }}" value="Option1">
-        <label>{{ q.option1 }}</label>
-    </div>
+            <h3 class="text-info">
 
-    <div class="form-check mx-4">
-        <input class="form-check-input" type="radio"
-               name="{{ forloop.counter }}" value="Option2">
-        <label>{{ q.option2 }}</label>
-    </div>
+                {{ forloop.counter }}.
+                {{ q.question }}
 
-    <div class="form-check mx-4">
-        <input class="form-check-input" type="radio"
-               name="{{ forloop.counter }}" value="Option3">
-        <label>{{ q.option3 }}</label>
-    </div>
+            </h3>
 
-    <div class="form-check mx-4">
-        <input class="form-check-input" type="radio"
-               name="{{ forloop.counter }}" value="Option4">
-        <label>{{ q.option4 }}</label>
-    </div>
+
+            <h4 style="text-align:right;">
+
+                [Marks {{ q.marks }}]
+
+            </h4>
+
+
+            <!-- OPTION 1 -->
+
+            <div class="form-check mx-4">
+
+                <input
+                    class="form-check-input"
+                    type="radio"
+                    name="{{ forloop.counter }}"
+                    value="Option1">
+
+                <label>
+                    {{ q.option1 }}
+                </label>
+
+            </div>
+
+
+            <!-- OPTION 2 -->
+
+            <div class="form-check mx-4">
+
+                <input
+                    class="form-check-input"
+                    type="radio"
+                    name="{{ forloop.counter }}"
+                    value="Option2">
+
+                <label>
+                    {{ q.option2 }}
+                </label>
+
+            </div>
+
+
+            <!-- OPTION 3 -->
+
+            <div class="form-check mx-4">
+
+                <input
+                    class="form-check-input"
+                    type="radio"
+                    name="{{ forloop.counter }}"
+                    value="Option3">
+
+                <label>
+                    {{ q.option3 }}
+                </label>
+
+            </div>
+
+
+            <!-- OPTION 4 -->
+
+            <div class="form-check mx-4">
+
+                <input
+                    class="form-check-input"
+                    type="radio"
+                    name="{{ forloop.counter }}"
+                    value="Option4">
+
+                <label>
+                    {{ q.option4 }}
+                </label>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+
+        <!-- BUTTONS -->
+
+        <div class="quiz-buttons">
+
+            <!-- PREVIOUS -->
+
+            <button
+                type="button"
+                id="prevBtn"
+                style="display:none;">
+
+                ← Previous
+
+            </button>
+
+
+            <!-- NEXT -->
+
+            <button
+                type="button"
+                id="nextBtn">
+
+                Next →
+
+            </button>
+
+
+            <!-- SUBMIT -->
+
+            <button
+                type="submit"
+                id="submitBtn"
+                style="display:none;">
+
+                Submit ✓
+
+            </button>
+
+        </div>
+
+
+    </form>
 
 </div>
-{% endfor %}
-       <button type="button" id="nextBtn" class="btn btn-primary" style="background-color: #1d4ed8;">
-    Next →
-</button>
-    </form>
-  </div>
 
-<script> 
-    function saveAns(){  
 
-        var ele = document.getElementsByTagName('input'); 
-        for(i = 0; i < ele.length; i++) { 
-            if(ele[i].type="radio") { 
-                if(ele[i].checked){        
-                  setCookie(ele[i].name,ele[i].value,3)
-                }
-            } 
-        } 
-          
+<script>
+
+    /* =========================================
+   EXAM SECURITY
+========================================= */
+
+let examStarted = false;
+let violationCount = 0;
+let maxViolations = 3;
+
+
+/* =========================================
+   FULLSCREEN
+========================================= */
+
+function enterExamFullscreen(){
+
+    if(document.documentElement.requestFullscreen){
+
+        document.documentElement
+            .requestFullscreen()
+            .then(function(){
+
+                examStarted = true;
+
+            })
+            .catch(function(error){
+
+                console.log(
+                    "Fullscreen not allowed:",
+                    error
+                );
+
+                examStarted = true;
+
+            });
+
     }
-    
-    function setCookie(cname, cvalue, exdays) {
-  var d = new Date();
-  d.setTime(d.getTime() + (exdays*24*60*60*1000));
-  var expires = "expires="+ d.toUTCString();
-  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    else{
+
+        examStarted = true;
+
+    }
+
 }
 
 
-let currentQuestion = 0;
-let questions = document.querySelectorAll(".question");
+/* =========================================
+   START FULLSCREEN ON FIRST USER ACTION
+========================================= */
 
-questions.forEach(q => q.style.display = "none");
-questions[0].style.display = "block";
+document.addEventListener(
+    "click",
+    function(){
+
+        if(!examStarted){
+
+            enterExamFullscreen();
+
+        }
+
+    },
+    { once: true }
+);
+
+
+/* =========================================
+   DISABLE RIGHT CLICK
+========================================= */
+
+document.addEventListener(
+    "contextmenu",
+    function(event){
+
+        event.preventDefault();
+
+    }
+);
+
+
+/* =========================================
+   DISABLE COPY
+========================================= */
+
+document.addEventListener(
+    "copy",
+    function(event){
+
+        event.preventDefault();
+
+    }
+);
+
+
+/* =========================================
+   DISABLE CUT
+========================================= */
+
+document.addEventListener(
+    "cut",
+    function(event){
+
+        event.preventDefault();
+
+    }
+);
+
+
+/* =========================================
+   DISABLE PASTE
+========================================= */
+
+document.addEventListener(
+    "paste",
+    function(event){
+
+        event.preventDefault();
+
+    }
+);
+
+
+/* =========================================
+   KEYBOARD PROTECTION
+========================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        let key =
+            event.key.toLowerCase();
+
+
+        /* F12 */
+
+        if(event.key === "F12"){
+
+            event.preventDefault();
+
+            showViolation(
+                "Developer tools are not allowed."
+            );
+
+            return;
+
+        }
+
+
+        /* Ctrl / Command shortcuts */
+
+        if(event.ctrlKey || event.metaKey){
+
+            if(
+                key === "c" ||
+                key === "v" ||
+                key === "x" ||
+                key === "u" ||
+                key === "s" ||
+                key === "p" ||
+                key === "a"
+            ){
+
+                event.preventDefault();
+
+                showViolation(
+                    "This keyboard action is not allowed during the exam."
+                );
+
+                return;
+
+            }
+
+
+            /* Ctrl + Shift + I */
+
+            if(
+                event.shiftKey &&
+                key === "i"
+            ){
+
+                event.preventDefault();
+
+                showViolation(
+                    "Developer tools are not allowed."
+                );
+
+                return;
+
+            }
+
+
+            /* Ctrl + Shift + J */
+
+            if(
+                event.shiftKey &&
+                key === "j"
+            ){
+
+                event.preventDefault();
+
+                showViolation(
+                    "Developer tools are not allowed."
+                );
+
+                return;
+
+            }
+
+
+            /* Ctrl + Shift + C */
+
+            if(
+                event.shiftKey &&
+                key === "c"
+            ){
+
+                event.preventDefault();
+
+                showViolation(
+                    "Developer tools are not allowed."
+                );
+
+                return;
+
+            }
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   VIOLATION WARNING
+========================================= */
+
+function showViolation(message){
+
+    violationCount++;
+
+
+    if(violationCount >= maxViolations){
+
+        alert(
+            "⚠️ Exam terminated!\n\n" +
+            "Repeated exam rule violations detected."
+        );
+
+        saveAns();
+
+        document.getElementById(
+            "quizForm"
+        ).submit();
+
+        return;
+
+    }
+
+
+    let warning =
+        document.getElementById(
+            "securityWarning"
+        );
+
+
+    document.getElementById(
+        "warningText"
+    ).innerHTML =
+        message;
+
+
+    document.getElementById(
+        "warningCount"
+    ).innerHTML =
+        "Warning " +
+        violationCount +
+        " / " +
+        maxViolations;
+
+
+    warning.style.display =
+        "block";
+
+}
+
+
+/* =========================================
+   CLOSE WARNING
+========================================= */
+
+function closeSecurityWarning(){
+
+    document.getElementById(
+        "securityWarning"
+    ).style.display =
+        "none";
+
+}
+
+
+/* =========================================
+   TAB / WINDOW CHANGE
+========================================= */
+
+document.addEventListener(
+    "visibilitychange",
+    function(){
+
+        if(
+            document.hidden &&
+            examStarted
+        ){
+
+            showViolation(
+                "Please stay on the exam page."
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   WINDOW BLUR
+========================================= */
+
+window.addEventListener(
+    "blur",
+    function(){
+
+        if(examStarted){
+
+            showViolation(
+                "You left the exam window."
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   FULLSCREEN EXIT
+========================================= */
+
+document.addEventListener(
+    "fullscreenchange",
+    function(){
+
+        if(
+            examStarted &&
+            !document.fullscreenElement
+        ){
+
+            showViolation(
+                "Please stay in fullscreen mode."
+            );
+
+        }
+
+    }
+);
+   /* =========================================
+   SAVE ANSWERS
+========================================= */
+
+function saveAns(){
+
+    var ele = document.getElementsByTagName('input');
+
+    for(var i = 0; i < ele.length; i++){
+
+        if(ele[i].type === "radio"){
+
+            if(ele[i].checked){
+
+                setCookie(
+                    ele[i].name,
+                    ele[i].value,
+                    3
+                );
+
+            }
+
+        }
+
+    }
+
+    return true;
+}
+
+
+/* =========================================
+   COOKIE
+========================================= */
+
+function setCookie(cname, cvalue, exdays){
+
+    var d = new Date();
+
+    d.setTime(
+        d.getTime() +
+        (exdays * 24 * 60 * 60 * 1000)
+    );
+
+    var expires =
+        "expires=" +
+        d.toUTCString();
+
+    document.cookie =
+        cname +
+        "=" +
+        cvalue +
+        ";" +
+        expires +
+        ";path=/";
+}
+
+
+/* =========================================
+   QUESTIONS
+========================================= */
+
+let currentQuestion = 0;
+
+let questions =
+    document.querySelectorAll(".question");
+
+
+questions.forEach(function(q){
+
+    q.style.display = "none";
+
+});
+
+
+if(questions.length > 0){
+
+    questions[0].style.display = "block";
+
+}
+
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+let nextBtn =
+    document.getElementById("nextBtn");
+
+let prevBtn =
+    document.getElementById("prevBtn");
+
+let submitBtn =
+    document.getElementById("submitBtn");
+
+
+/* =========================================
+   TIMER
+========================================= */
 
 let timeLeft = 30;
+
 let timer;
+
+
+/* =========================================
+   BEEP SOUND
+   No MP3 required
+========================================= */
+
+let audioContext = null;
+
+
+function playBeep(){
+
+    try{
+
+        if(!audioContext){
+
+            audioContext =
+                new (window.AudioContext ||
+                window.webkitAudioContext)();
+
+        }
+
+        if(audioContext.state === "suspended"){
+
+            audioContext.resume();
+
+        }
+
+        let oscillator =
+            audioContext.createOscillator();
+
+        let gain =
+            audioContext.createGain();
+
+
+        oscillator.type = "sine";
+
+        oscillator.frequency.setValueAtTime(
+            900,
+            audioContext.currentTime
+        );
+
+
+        gain.gain.setValueAtTime(
+            0.15,
+            audioContext.currentTime
+        );
+
+        gain.gain.exponentialRampToValueAtTime(
+            0.001,
+            audioContext.currentTime + 0.15
+        );
+
+
+        oscillator.connect(gain);
+
+        gain.connect(audioContext.destination);
+
+
+        oscillator.start();
+
+        oscillator.stop(
+            audioContext.currentTime + 0.15
+        );
+
+    }
+
+    catch(error){
+
+        console.log("Beep error:", error);
+
+    }
+
+}
+
+
+/* =========================================
+   START TIMER
+========================================= */
 
 function startTimer(){
 
     clearInterval(timer);
 
-    document.getElementById("timer").innerHTML = timeLeft;
+
+    let timerElement =
+        document.getElementById("timer");
+
+
+    let timerBox =
+        document.querySelector(".timer-box");
+
+
+    timerElement.innerHTML =
+        timeLeft;
+
+
+    timerBox.classList.remove(
+        "timer-warning"
+    );
+
 
     timer = setInterval(function(){
 
-        document.getElementById("timer").innerHTML = timeLeft;
+
+        timerElement.innerHTML =
+            timeLeft;
+
+
+        /* ==============================
+           LAST 10 SECONDS
+        ============================== */
+
+        if(timeLeft <= 10 && timeLeft > 0){
+
+            timerBox.classList.add(
+                "timer-warning"
+            );
+
+
+            /* 🔔 BEEP */
+
+            playBeep();
+
+        }
+
+
+        /* ==============================
+           TIME OVER
+        ============================== */
 
         if(timeLeft <= 0){
+
             clearInterval(timer);
+
+
+            timerBox.classList.remove(
+                "timer-warning"
+            );
+
+
             nextQuestion();
+
+
             return;
+
         }
+
 
         timeLeft--;
 
     },1000);
+
 }
+
+
+/* =========================================
+   UPDATE BUTTONS
+========================================= */
+
+function updateButtons(){
+
+
+    /* FIRST QUESTION */
+
+    if(currentQuestion === 0){
+
+        prevBtn.style.display =
+            "none";
+
+    }
+
+    else{
+
+        prevBtn.style.display =
+            "inline-block";
+
+    }
+
+
+    /* LAST QUESTION */
+
+    if(currentQuestion === questions.length - 1){
+
+        nextBtn.style.display =
+            "none";
+
+        submitBtn.style.display =
+            "inline-block";
+
+    }
+
+    else{
+
+        nextBtn.style.display =
+            "inline-block";
+
+        submitBtn.style.display =
+            "none";
+
+    }
+
+}
+
+
+/* =========================================
+   NEXT QUESTION
+========================================= */
 
 function nextQuestion(){
 
-    questions[currentQuestion].classList.add("hide");
+
+    /* Save current answer */
+
+    saveAns();
+
+
+    if(currentQuestion >= questions.length - 1){
+
+        return;
+
+    }
+
+
+    questions[currentQuestion]
+        .classList.add("hide");
+
 
     setTimeout(function(){
 
-        questions[currentQuestion].style.display = "none";
-        questions[currentQuestion].classList.remove("hide");
+
+        questions[currentQuestion]
+            .style.display = "none";
+
+
+        questions[currentQuestion]
+            .classList.remove("hide");
+
 
         currentQuestion++;
 
-        if(currentQuestion >= questions.length){
-            saveAns();
-            document.getElementById("quizForm").submit();
-            return;
-        }
 
-        questions[currentQuestion].style.display = "block";
-        questions[currentQuestion].classList.add("show");
+        questions[currentQuestion]
+            .style.display = "block";
+
+
+        questions[currentQuestion]
+            .classList.add("show");
+
 
         setTimeout(function(){
-            questions[currentQuestion].classList.remove("show");
+
+            questions[currentQuestion]
+                .classList.remove("show");
+
         },350);
 
+
+        /* Reset timer */
+
         timeLeft = 30;
+
         startTimer();
 
+
+        updateButtons();
+
+        restoreSelectedOption();
+
+
     },250);
+
 }
 
-document.querySelectorAll(".form-check-input").forEach(function(radio){
 
-    radio.addEventListener("change", function(){
+/* =========================================
+   PREVIOUS QUESTION
+========================================= */
 
-        // Remove selected class from current question options
-        this.closest(".question")
+function previousQuestion(){
+
+
+    saveAns();
+
+
+    if(currentQuestion <= 0){
+
+        return;
+
+    }
+
+
+    questions[currentQuestion]
+        .classList.add("hide");
+
+
+    setTimeout(function(){
+
+
+        questions[currentQuestion]
+            .style.display = "none";
+
+
+        questions[currentQuestion]
+            .classList.remove("hide");
+
+
+        currentQuestion--;
+
+
+        questions[currentQuestion]
+            .style.display = "block";
+
+
+        questions[currentQuestion]
+            .classList.add("show");
+
+
+        setTimeout(function(){
+
+            questions[currentQuestion]
+                .classList.remove("show");
+
+        },350);
+
+
+        /* Reset timer */
+
+        timeLeft = 30;
+
+        startTimer();
+
+
+        updateButtons();
+
+        restoreSelectedOption();
+
+
+    },250);
+
+}
+
+
+/* =========================================
+   OPTION SELECTION
+========================================= */
+
+document
+.querySelectorAll(".form-check-input")
+.forEach(function(radio){
+
+
+    radio.addEventListener(
+        "change",
+        function(){
+
+
+            let current =
+                this.closest(".question");
+
+
+            current
             .querySelectorAll(".form-check")
             .forEach(function(option){
-                option.classList.remove("selected");
+
+                option.classList.remove(
+                    "selected"
+                );
+
             });
 
-        // Add animation to selected option
-        this.parentElement.classList.add("selected");
 
-    });
+            this.parentElement
+                .classList.add("selected");
+
+
+            /* Save immediately */
+
+            setCookie(
+                this.name,
+                this.value,
+                3
+            );
+
+
+        }
+    );
 
 });
 
-document.getElementById("nextBtn").onclick = nextQuestion;
+
+/* =========================================
+   RESTORE SELECTED OPTION
+========================================= */
+
+function restoreSelectedOption(){
+
+
+    let current =
+        questions[currentQuestion];
+
+
+    current
+    .querySelectorAll(".form-check")
+    .forEach(function(option){
+
+        option.classList.remove(
+            "selected"
+        );
+
+    });
+
+
+    let checked =
+        current.querySelector(
+            "input[type='radio']:checked"
+        );
+
+
+    if(checked){
+
+        checked.parentElement
+            .classList.add("selected");
+
+    }
+
+}
+
+
+/* =========================================
+   BUTTON EVENTS
+========================================= */
+
+nextBtn.onclick =
+    nextQuestion;
+
+
+prevBtn.onclick =
+    previousQuestion;
+
+
+/* =========================================
+   SUBMIT
+========================================= */
+
+submitBtn.addEventListener(
+    "click",
+    function(){
+
+        saveAns();
+
+    }
+);
+
+
+/* =========================================
+   INITIALIZE
+========================================= */
+
+updateButtons();
+
+restoreSelectedOption();
+
 startTimer();
-   
-</script> 
+</script>
 
 
 {% endblock content %}

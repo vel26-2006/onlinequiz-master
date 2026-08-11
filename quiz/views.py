@@ -73,6 +73,17 @@ def delete_all_questions(request, cid):
     Question.objects.filter(course=course).delete()
     return redirect('view-question', pk=cid)
 
+def delete_course(request, cid):
+    course = get_object_or_404(Course, id=cid)
+
+    # Delete all questions
+    Question.objects.filter(course=course).delete()
+
+    # Delete course
+    course.delete()
+
+    return redirect('view-course')
+
 def admin_login_view(request):
     if request.method == "POST":
         username = request.POST.get("username")

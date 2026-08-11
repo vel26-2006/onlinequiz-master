@@ -236,8 +236,12 @@ th,td{
                     <td>{{t.total_marks}}</td>
 
                     <td>
-                        <a href="{% url 'delete-course' t.id %}" class="btn btn-danger btn-sm">
-                            <i class="fas fa-trash"></i>
+                          <a href="{% url 'delete-course' cid=t.id %}"
+                           class="btn btn-danger"
+                           onclick="return confirm('Are you sure you want to delete this course and all its questions?');">
+                              <img src="{% static 'image/delete.png' %}"
+         alt="Delete"
+         style="width:35px; height:35px; cursor:pointer;">
                         </a>
                     </td>
 
