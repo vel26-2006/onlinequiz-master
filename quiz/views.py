@@ -30,6 +30,7 @@ from django.core.mail import send_mail
 from django.utils import timezone
 from datetime import timedelta
 from django.http import JsonResponse
+from .models import Course, Question
 
 def is_student(user):
     return user.groups.filter(name='STUDENT').exists()
@@ -82,7 +83,7 @@ def delete_course(request, cid):
     # Delete course
     course.delete()
 
-    return redirect('view-course')
+    return redirect('admin-view-course')
 
 def admin_login_view(request):
     if request.method == "POST":
@@ -351,7 +352,7 @@ def delete_course_view(request, pk):
 def admin_question_view(request):
     return render(request,'quiz/admin_question.html')
 
-from django.db.models import Sum
+
 
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)

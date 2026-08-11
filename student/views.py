@@ -145,7 +145,7 @@ def start_exam_view(request, pk):
     if QMODEL.Result.objects.filter(student=student, exam=course).exists():
         return redirect('student-exam')
 
-    questions = QMODEL.Question.objects.filter(course=course)
+    questions = QMODEL.Question.objects.filter(course=course).order_by('id')
 
     response = render(request, 'student/start_exam.html', {
         'course': course,
@@ -158,44 +158,84 @@ def start_exam_view(request, pk):
 @login_required(login_url='studentlogin')
 @user_passes_test(is_student)
 def calculate_marks_view(request):
-    if request.COOKIES.get('course_id') is not None:
-        course_id = request.COOKIES.get('course_id')
-        course = QMODEL.Course.objects.get(id=course_id)
 
-        total_marks = 0
-        questions = QMODEL.Question.objects.filter(course=course)
+    course_id = request.COOKIES.get('course_id')
 
-        for i in range(len(questions)):
-            selected_ans = request.COOKIES.get(str(i+1))
-            actual_answer = questions[i].answer
-            if selected_ans == actual_answer:
-                total_marks += questions[i].marks
+    if not course_id:
+        return redirect('student-exam')
 
-        student = models.Student.objects.get(user_id=request.user.id)
+    course = QMODEL.Course.objects.get(id=course_id)
 
-        result = QMODEL.Result()
-        result.marks = total_marks
-        result.exam = course
-        result.student = student
+    questions = QMODEL.Question.objects.filter(
+        course=course
+    ).order_by('id')
 
-        correct_answers = []
+    total_marks = 0
+    correct_answers = []
 
-        for i in range(len(questions)):
-            selected_ans = request.COOKIES.get(str(i+1))
-            actual_answer = questions[i].answer
+    for i, question in enumerate(questions, start=1):
 
-            correct_answers.append({
-    'question': questions[i].question,
-    'selected': getattr(questions[i], selected_ans.lower()) if selected_ans else "Not Answered",
-    'correct': getattr(questions[i], actual_answer.lower()),
-    'is_correct': selected_ans == actual_answer,
-})
-        result.save()
+        selected_ans = request.COOKIES.get(str(i))
+        actual_answer = question.answer
 
-        return render(request, 'student/result.html', {
-            'score': total_marks,
-            'answers': correct_answers,
+        selected_clean = (
+            selected_ans.strip().lower()
+            if selected_ans else ""
+        )
+
+        actual_clean = (
+            actual_answer.strip().lower()
+            if actual_answer else ""
+        )
+
+        is_correct = (
+            selected_clean == actual_clean
+            and selected_clean != ""
+        )
+
+        if is_correct:
+            total_marks += question.marks
+
+        if selected_ans:
+            try:
+                selected_text = getattr(
+                    question,
+                    selected_clean
+                )
+            except AttributeError:
+                selected_text = selected_ans
+        else:
+            selected_text = "Not Answered"
+
+        try:
+            correct_text = getattr(
+                question,
+                actual_clean
+            )
+        except AttributeError:
+            correct_text = actual_answer
+
+        correct_answers.append({
+            'question': question.question,
+            'selected': selected_text,
+            'correct': correct_text,
+            'is_correct': is_correct,
         })
+
+    student = models.Student.objects.get(
+        user_id=request.user.id
+    )
+
+    result = QMODEL.Result()
+    result.marks = total_marks
+    result.exam = course
+    result.student = student
+    result.save()
+
+    return render(request, 'student/result.html', {
+        'score': total_marks,
+        'answers': correct_answers,
+    })
 
 @login_required(login_url='studentlogin')
 @user_passes_test(is_student)

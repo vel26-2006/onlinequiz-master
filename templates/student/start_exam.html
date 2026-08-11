@@ -981,27 +981,146 @@ document.addEventListener(
    SAVE ANSWERS
 ========================================= */
 
+
+
+/* =========================================
+   COOKIE
+========================================= */
 function saveAns(){
 
-    var ele = document.getElementsByTagName('input');
+    let checked =
+        document.querySelectorAll(
+            'input[type="radio"]:checked'
+        );
 
-    for(var i = 0; i < ele.length; i++){
+    checked.forEach(function(radio){
 
-        if(ele[i].type === "radio"){
+        setCookie(
+            radio.name,
+            radio.value,
+            3
+        );
 
-            if(ele[i].checked){
+    });
 
-                setCookie(
-                    ele[i].name,
-                    ele[i].value,
-                    3
-                );
+    return true;
+}
 
-            }
+/* =========================================
+   QUESTIONS
+========================================= */
 
-        }
 
-    }
+function setCookie(cname, cvalue, exdays){
+
+    let d = new Date();
+
+    d.setTime(
+        d.getTime() +
+        (exdays * 24 * 60 * 60 * 1000)
+    );
+
+    let expires =
+        "expires=" + d.toUTCString();
+
+    document.cookie =
+        cname + "=" + cvalue +
+        ";" + expires +
+        ";path=/;SameSite=Lax";
+}
+
+let currentQuestion = 0;
+
+let questions = document.querySelectorAll(".question");
+
+
+/* =========================================
+   CLEAR OLD EXAM ANSWERS
+   Only runs when exam page starts
+========================================= */
+
+for(let i = 1; i <= questions.length; i++){
+
+    document.cookie =
+        i + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+}
+
+questions.forEach(function(q){
+    q.style.display = "none";
+});
+
+if(questions.length > 0){
+    questions[0].style.display = "block";
+}
+
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+let nextBtn = document.getElementById("nextBtn");
+let prevBtn = document.getElementById("prevBtn");
+let submitBtn = document.getElementById("submitBtn");
+
+
+/* =========================================
+   SAVE ANSWER IMMEDIATELY
+========================================= */
+
+let radioButtons = document.querySelectorAll(
+    'input[type="radio"]'
+);
+
+radioButtons.forEach(function(radio){
+
+    radio.addEventListener("change", function(){
+
+        // Save immediately when student selects option
+        setCookie(
+            this.name,
+            this.value,
+            3
+        );
+
+        // Highlight selected option
+        let parent = this.closest(".form-check");
+
+        let allOptions =
+            this.closest(".question")
+                .querySelectorAll(".form-check");
+
+        allOptions.forEach(function(option){
+            option.classList.remove("selected");
+        });
+
+        parent.classList.add("selected");
+
+    });
+
+});
+
+
+/* =========================================
+   SAVE ALL ANSWERS
+========================================= */
+
+function saveAns(){
+
+    let checked =
+        document.querySelectorAll(
+            'input[type="radio"]:checked'
+        );
+
+    checked.forEach(function(radio){
+
+        setCookie(
+            radio.name,
+            radio.value,
+            3
+        );
+
+    });
 
     return true;
 }
@@ -1013,63 +1132,21 @@ function saveAns(){
 
 function setCookie(cname, cvalue, exdays){
 
-    var d = new Date();
+    let d = new Date();
 
     d.setTime(
         d.getTime() +
         (exdays * 24 * 60 * 60 * 1000)
     );
 
-    var expires =
-        "expires=" +
-        d.toUTCString();
+    let expires =
+        "expires=" + d.toUTCString();
 
     document.cookie =
-        cname +
-        "=" +
-        cvalue +
-        ";" +
-        expires +
-        ";path=/";
+        cname + "=" + cvalue +
+        ";" + expires +
+        ";path=/;SameSite=Lax";
 }
-
-
-/* =========================================
-   QUESTIONS
-========================================= */
-
-let currentQuestion = 0;
-
-let questions =
-    document.querySelectorAll(".question");
-
-
-questions.forEach(function(q){
-
-    q.style.display = "none";
-
-});
-
-
-if(questions.length > 0){
-
-    questions[0].style.display = "block";
-
-}
-
-
-/* =========================================
-   BUTTONS
-========================================= */
-
-let nextBtn =
-    document.getElementById("nextBtn");
-
-let prevBtn =
-    document.getElementById("prevBtn");
-
-let submitBtn =
-    document.getElementById("submitBtn");
 
 
 /* =========================================
@@ -1077,82 +1154,7 @@ let submitBtn =
 ========================================= */
 
 let timeLeft = 30;
-
 let timer;
-
-
-/* =========================================
-   BEEP SOUND
-   No MP3 required
-========================================= */
-
-let audioContext = null;
-
-
-function playBeep(){
-
-    try{
-
-        if(!audioContext){
-
-            audioContext =
-                new (window.AudioContext ||
-                window.webkitAudioContext)();
-
-        }
-
-        if(audioContext.state === "suspended"){
-
-            audioContext.resume();
-
-        }
-
-        let oscillator =
-            audioContext.createOscillator();
-
-        let gain =
-            audioContext.createGain();
-
-
-        oscillator.type = "sine";
-
-        oscillator.frequency.setValueAtTime(
-            900,
-            audioContext.currentTime
-        );
-
-
-        gain.gain.setValueAtTime(
-            0.15,
-            audioContext.currentTime
-        );
-
-        gain.gain.exponentialRampToValueAtTime(
-            0.001,
-            audioContext.currentTime + 0.15
-        );
-
-
-        oscillator.connect(gain);
-
-        gain.connect(audioContext.destination);
-
-
-        oscillator.start();
-
-        oscillator.stop(
-            audioContext.currentTime + 0.15
-        );
-
-    }
-
-    catch(error){
-
-        console.log("Beep error:", error);
-
-    }
-
-}
 
 
 /* =========================================
@@ -1163,34 +1165,19 @@ function startTimer(){
 
     clearInterval(timer);
 
-
     let timerElement =
         document.getElementById("timer");
-
 
     let timerBox =
         document.querySelector(".timer-box");
 
-
     timerElement.innerHTML =
         timeLeft;
 
-
-    timerBox.classList.remove(
-        "timer-warning"
-    );
-
-
     timer = setInterval(function(){
-
 
         timerElement.innerHTML =
             timeLeft;
-
-
-        /* ==============================
-           LAST 10 SECONDS
-        ============================== */
 
         if(timeLeft <= 10 && timeLeft > 0){
 
@@ -1198,40 +1185,26 @@ function startTimer(){
                 "timer-warning"
             );
 
-
-            /* 🔔 BEEP */
-
             playBeep();
 
         }
-
-
-        /* ==============================
-           TIME OVER
-        ============================== */
 
         if(timeLeft <= 0){
 
             clearInterval(timer);
 
-
             timerBox.classList.remove(
                 "timer-warning"
             );
 
-
             nextQuestion();
 
-
             return;
-
         }
-
 
         timeLeft--;
 
-    },1000);
-
+    }, 1000);
 }
 
 
@@ -1241,16 +1214,11 @@ function startTimer(){
 
 function updateButtons(){
 
-
-    /* FIRST QUESTION */
-
     if(currentQuestion === 0){
 
-        prevBtn.style.display =
-            "none";
+        prevBtn.style.display = "none";
 
     }
-
     else{
 
         prevBtn.style.display =
@@ -1259,18 +1227,17 @@ function updateButtons(){
     }
 
 
-    /* LAST QUESTION */
+    if(
+        currentQuestion ===
+        questions.length - 1
+    ){
 
-    if(currentQuestion === questions.length - 1){
-
-        nextBtn.style.display =
-            "none";
+        nextBtn.style.display = "none";
 
         submitBtn.style.display =
             "inline-block";
 
     }
-
     else{
 
         nextBtn.style.display =
@@ -1290,13 +1257,13 @@ function updateButtons(){
 
 function nextQuestion(){
 
-
-    /* Save current answer */
-
+    // Save current selected answer
     saveAns();
 
-
-    if(currentQuestion >= questions.length - 1){
+    if(
+        currentQuestion >=
+        questions.length - 1
+    ){
 
         return;
 
@@ -1309,10 +1276,8 @@ function nextQuestion(){
 
     setTimeout(function(){
 
-
         questions[currentQuestion]
             .style.display = "none";
-
 
         questions[currentQuestion]
             .classList.remove("hide");
@@ -1334,22 +1299,18 @@ function nextQuestion(){
             questions[currentQuestion]
                 .classList.remove("show");
 
-        },350);
-
-
-        /* Reset timer */
-
-        timeLeft = 30;
-
-        startTimer();
+        }, 350);
 
 
         updateButtons();
 
-        restoreSelectedOption();
 
+        // Reset timer for new question
+        timeLeft = 30;
 
-    },250);
+        startTimer();
+
+    }, 250);
 
 }
 
@@ -1360,150 +1321,108 @@ function nextQuestion(){
 
 function previousQuestion(){
 
-
     saveAns();
 
-
     if(currentQuestion <= 0){
-
         return;
-
     }
 
 
     questions[currentQuestion]
-        .classList.add("hide");
+        .style.display = "none";
+
+
+    currentQuestion--;
+
+
+    questions[currentQuestion]
+        .style.display = "block";
+
+
+    questions[currentQuestion]
+        .classList.add("show");
 
 
     setTimeout(function(){
 
-
         questions[currentQuestion]
-            .style.display = "none";
+            .classList.remove("show");
+
+    }, 350);
 
 
-        questions[currentQuestion]
-            .classList.remove("hide");
+    // Restore selected answer
+    let questionNumber =
+        currentQuestion + 1;
+
+    let savedAnswer =
+        getCookie(
+            String(questionNumber)
+        );
 
 
-        currentQuestion--;
+    if(savedAnswer){
+
+        let radio =
+            document.querySelector(
+                'input[name="' +
+                questionNumber +
+                '"][value="' +
+                savedAnswer +
+                '"]'
+            );
+
+        if(radio){
+
+            radio.checked = true;
+
+            radio.closest(".form-check")
+                .classList.add("selected");
+
+        }
+
+    }
 
 
-        questions[currentQuestion]
-            .style.display = "block";
+    updateButtons();
 
 
-        questions[currentQuestion]
-            .classList.add("show");
+    timeLeft = 30;
 
-
-        setTimeout(function(){
-
-            questions[currentQuestion]
-                .classList.remove("show");
-
-        },350);
-
-
-        /* Reset timer */
-
-        timeLeft = 30;
-
-        startTimer();
-
-
-        updateButtons();
-
-        restoreSelectedOption();
-
-
-    },250);
+    startTimer();
 
 }
 
 
 /* =========================================
-   OPTION SELECTION
+   GET COOKIE
 ========================================= */
 
-document
-.querySelectorAll(".form-check-input")
-.forEach(function(radio){
+function getCookie(name){
 
+    let cookies =
+        document.cookie.split(";");
 
-    radio.addEventListener(
-        "change",
-        function(){
+    for(let i = 0; i < cookies.length; i++){
 
+        let cookie =
+            cookies[i].trim();
 
-            let current =
-                this.closest(".question");
+        if(
+            cookie.indexOf(
+                name + "="
+            ) === 0
+        ){
 
-
-            current
-            .querySelectorAll(".form-check")
-            .forEach(function(option){
-
-                option.classList.remove(
-                    "selected"
-                );
-
-            });
-
-
-            this.parentElement
-                .classList.add("selected");
-
-
-            /* Save immediately */
-
-            setCookie(
-                this.name,
-                this.value,
-                3
+            return cookie.substring(
+                name.length + 1
             );
 
-
         }
-    );
-
-});
-
-
-/* =========================================
-   RESTORE SELECTED OPTION
-========================================= */
-
-function restoreSelectedOption(){
-
-
-    let current =
-        questions[currentQuestion];
-
-
-    current
-    .querySelectorAll(".form-check")
-    .forEach(function(option){
-
-        option.classList.remove(
-            "selected"
-        );
-
-    });
-
-
-    let checked =
-        current.querySelector(
-            "input[type='radio']:checked"
-        );
-
-
-    if(checked){
-
-        checked.parentElement
-            .classList.add("selected");
 
     }
+
+    return null;
 
 }
 
@@ -1512,20 +1431,34 @@ function restoreSelectedOption(){
    BUTTON EVENTS
 ========================================= */
 
-nextBtn.onclick =
-    nextQuestion;
+nextBtn.addEventListener(
+    "click",
+    function(){
+
+        nextQuestion();
+
+    }
+);
 
 
-prevBtn.onclick =
-    previousQuestion;
+prevBtn.addEventListener(
+    "click",
+    function(){
+
+        previousQuestion();
+
+    }
+);
 
 
 /* =========================================
-   SUBMIT
+   FORM SUBMIT
 ========================================= */
 
-submitBtn.addEventListener(
-    "click",
+document.getElementById(
+    "quizForm"
+).addEventListener(
+    "submit",
     function(){
 
         saveAns();
@@ -1535,14 +1468,21 @@ submitBtn.addEventListener(
 
 
 /* =========================================
-   INITIALIZE
+   INITIAL BUTTON STATE
 ========================================= */
 
 updateButtons();
 
-restoreSelectedOption();
 
-startTimer();
+/* =========================================
+   START TIMER
+========================================= */
+
+if(questions.length > 0){
+
+    startTimer();
+
+}
 </script>
 
 
